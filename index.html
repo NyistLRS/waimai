@@ -11,35 +11,14 @@
 
 	<body>
 		<div id="app">
+			<router-view v-bind:active="active" v-bind:selected="selected" @services-change="servicesChange"></router-view>
 			<!-- 页面 -->
-			<mt-tab-container v-model="active">
-				<mt-tab-container-item id="tab-container1">
-					
-				</mt-tab-container-item>
-				<mt-tab-container-item id="tab-container2">
-					222
-				</mt-tab-container-item>
-				<mt-tab-container-item id="tab-container3">
-					333
-				</mt-tab-container-item>
-			</mt-tab-container>
-			<!-- 底部的tab切换 -->
-			<mt-tabbar v-model="selected">
-				<mt-tab-item id="index">
-					<img slot="icon"> 首页
-				</mt-tab-item>
-				<mt-tab-item id="car">
-					<img slot="icon" > 购物车
-				</mt-tab-item>
-				<mt-tab-item id="me">
-					<img slot="icon" > 我的
-				</mt-tab-item>
-			</mt-tabbar>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/vue.js"></script>
 	<script type="text/javascript" src="js/vue-router.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
+	<script src="js/components.js"></script>
 	<script src="js/demo.js"></script>
 	<script>
 	</script>
