@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+		<title>首页</title>
+		<link rel="stylesheet" href="css/normalize.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<!-- 页面 -->
+			<mt-tab-container v-model="active">
+				<mt-tab-container-item id="tab-container1">
+					
+				</mt-tab-container-item>
+				<mt-tab-container-item id="tab-container2">
+					222
+				</mt-tab-container-item>
+				<mt-tab-container-item id="tab-container3">
+					333
+				</mt-tab-container-item>
+			</mt-tab-container>
+			<!-- 底部的tab切换 -->
+			<mt-tabbar v-model="selected">
+				<mt-tab-item id="index">
+					<img slot="icon"> 首页
+				</mt-tab-item>
+				<mt-tab-item id="car">
+					<img slot="icon" > 购物车
+				</mt-tab-item>
+				<mt-tab-item id="me">
+					<img slot="icon" > 我的
+				</mt-tab-item>
+			</mt-tabbar>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/vue-router.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script src="js/demo.js"></script>
+	<script>
+	</script>
+
+</html>
