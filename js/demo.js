@@ -7,14 +7,6 @@
 		new Vue({
 			el: "#app",
 			data: {
-				value: "搜索",
-				active:"tab-container1",
-				selected:"index"
-			},
-			methods:{
-				servicesChange (val) {
-                	this.selected = val;
-            	}
 			},
 			router
 		})

@@ -1,0 +1,185 @@
+html{
+	font-size: 625%;
+}
+ body {
+ 	font-size: .14rem;
+ 	}
+html,body{
+	height: 100%;
+	width: 100%;
+}
+ body,html,h1,p,ul,h2,h3{
+ 	margin: 0;
+ 	padding: 0;
+ }
+ div,section,article,header,footer{
+ 	box-sizing: border-box;
+ }
+ #app{
+ 	padding-bottom: .55rem;
+ }
+ #app .mint-tabbar{
+	position: fixed;
+}
+.index{
+	padding-top: .4rem;
+}
+.index .mint-header{
+	background-color: white;
+	color: #333;
+	font-family: "微软雅黑";
+}
+.toolbar{
+	height: .4rem;
+	width: 100%;
+	display: flex;
+	background-image: -webkit-linear-gradient(top,#d9d9d9,#d9d9d9 2%,transparent 0);
+}
+.seat{
+	display: inline-flex;
+	width: .5rem;
+	padding-left: .05rem;
+	height: .4rem;
+	line-height: .4rem;
+	text-align: center;
+	position: relative;
+}
+.seat i{
+	position: absolute;
+	right: .05rem;
+	top: .135rem;
+	border-top: .07rem solid lightgray;
+	border-left: .07rem solid transparent;
+	border-right: .07rem solid transparent;
+}
+.top-search{
+	height: 100%;
+	flex: auto;
+}
+.top-search .mint-search{
+	height: 100%;
+}
+.top-search .mint-searchbar{
+	padding: 8px 10px 5px 10px;
+}
+.top-search .mint-searchbar-inner{
+	padding:0 6px ;
+}
+.mess{
+	width: .5rem;
+	height: .4rem;
+	text-align: center;
+	line-height: .4rem;
+}
+.my-swiper{
+	width: 100%;
+	height: 1.14rem;
+}
+.slide1{
+	background: yellowgreen;
+}
+.slide2{
+	background: lightblue;
+}
+.slide3{
+	background: lightpink;
+}
+.listView{
+	width: 100%;
+	height: 1.14rem;
+	background: paleturquoise;
+}
+.banner{
+	height: 1.3rem;
+	width: 100%;
+	background: lightgoldenrodyellow;
+}
+.banner img{
+	width: 100%;
+	height: 100%;
+}
+.gg{
+	display: flex;
+	height: 1.3rem;
+	width: 100%;
+	background: lightblue;
+	padding: .14rem 0 .3rem;
+	text-align: center;
+}
+.gg .gg-item{
+	flex: 1;
+	padding: 0 .05rem;
+	height: 100%;
+}
+.gg .gg-item .gg-name{
+	height: .28rem;
+	line-height: .28rem;
+}
+.gg-img{
+	height: 100%;
+}
+.gg .gg-item img{
+	height: 100%;
+	width: 100%;
+}
+.fj{
+	margin-bottom: .3rem;
+}
+.fj-store{
+	display: flex;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	width: 100%;
+	border: .01rem solid lightgrey;
+	margin-bottom: .03rem;
+}
+.store-img{
+	height: 100%;
+	width: .9rem;
+	padding: .16rem .1rem;
+}
+.store-img img{
+	height: 100%;
+	width: 100%;
+}
+.store-detail{
+	flex: auto;
+	padding: .2rem 0;
+}
+.fj .icon{
+	position: absolute;
+	display: inline-block;
+	right: .1rem;
+	font-weight: 600;
+	font-size: .24rem;
+	font-family: "微软雅黑";
+}
+.store-title{
+	height: .2rem;
+	width: 100%;
+	line-height: .2rem;
+}
+.store-title span{
+	display: inline-block;
+	vertical-align: top;
+}
+.store-title .store-name{
+	display: inline-block;
+	font-family:"微软雅黑";
+	font-weight: 600;
+	width:50% ;
+	overflow: hidden;
+	margin-right:.1rem ;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.store-title .store-range{
+	float: right;
+	margin-right: .2rem;
+}
+.store-mess{
+	width: 100%;
+	line-height: 1;
+	margin-top: .1rem;
+	padding-right: .3rem;
+}

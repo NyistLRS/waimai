@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+		<!--<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<title>首页</title>
-		<link rel="stylesheet" href="css/normalize.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/demo.css" />
 	</head>
 
 	<body>
 		<div id="app">
-			<router-view v-bind:active="active" v-bind:selected="selected" @services-change="servicesChange"></router-view>
+			<router-view></router-view>
 			<!-- 页面 -->
 		</div>
 	</body>
-	<script type="text/javascript" src="js/vue.js"></script>
-	<script type="text/javascript" src="js/vue-router.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
-	<script src="js/components.js"></script>
+	<script type="text/javascript" src="lib/vue.js"></script>
+	<script type="text/javascript" src="lib/vue-router.js"></script>
+	<script type="text/javascript" src="lib/index.js"></script>
+	<script src="components/components.js"></script>
 	<script src="js/demo.js"></script>
 	<script>
 	</script>
