@@ -2,6 +2,7 @@
 			mdoe: history,
 			routes:[
 				{path:'/',component:temp1}
+//				{path:'/search',component:temp2}
 			]
 		});
 		new Vue({

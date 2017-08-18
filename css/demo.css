@@ -75,7 +75,7 @@ html,body{
 	width: 100%;
 	height: 1.14rem;
 }
-.slide1{
+/*.slide1{
 	background: yellowgreen;
 }
 .slide2{
@@ -83,11 +83,39 @@ html,body{
 }
 .slide3{
 	background: lightpink;
+}*/
+.mint-swipe-item img{
+	height: 100%;
+	width: 100%;
+}
+.mint-swipe-indicator{
+	border: 1px solid white;
+	opacity: 1;
+	background: transparent;
+}
+.mint-swipe-indicator.is-active{
+	background: white;
 }
 .listView{
 	width: 100%;
-	height: 1.14rem;
-	background: paleturquoise;
+	height: 1.49rem;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: flex-start;
+	/*background: paleturquoise;*/
+}
+.listView a{
+	box-sizing: border-box;
+	height: 50%;
+	width: 20%;
+	text-align: center;
+	padding-top:.1rem ;
+}
+.menu-list img{
+	display: block;
+	width: .34rem;
+	height: .34rem;
+	margin: 0 auto .03rem;
 }
 .banner{
 	height: 1.3rem;
@@ -102,7 +130,7 @@ html,body{
 	display: flex;
 	height: 1.3rem;
 	width: 100%;
-	background: lightblue;
+	/*background: lightblue;*/
 	padding: .14rem 0 .3rem;
 	text-align: center;
 }
@@ -117,6 +145,7 @@ html,body{
 }
 .gg-img{
 	height: 100%;
+	border: .01rem solid lightgray;
 }
 .gg .gg-item img{
 	height: 100%;
@@ -182,4 +211,7 @@ html,body{
 	line-height: 1;
 	margin-top: .1rem;
 	padding-right: .3rem;
+}
+.mint-tabbar > .mint-tab-item.is-selected{
+	color: red;
 }

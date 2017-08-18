@@ -1,13 +1,36 @@
 /*  首页   */
 var swiper = Vue.component('swiper-view',{
+	data(){
+		return {
+			swiper1:"./img/swiper1.jpg",
+			swiper2:"./img/swiper2.jpg",
+			swiper3:"./img/swiper3.jpg"
+		}
+	},
 	template:'<div class="my-swiper"><mt-swipe :auto="4000">'
-			  	+'<mt-swipe-item class="slide1">1</mt-swipe-item>'
-			  	+'<mt-swipe-item class="slide2">2</mt-swipe-item>'
-			  	+'<mt-swipe-item class="slide3">3</mt-swipe-item>'
+			  	+'<mt-swipe-item class="slide1"><img :src="swiper1"></mt-swipe-item>'
+			  	+'<mt-swipe-item class="slide2"><img :src="swiper2"></mt-swipe-item>'
+			  	+'<mt-swipe-item class="slide3"><img :src="swiper3"></mt-swipe-item>'
 			+'</mt-swipe></div>'
 });
 var list = Vue.component('list-view',{
-	template : '<div class="listView"></div>'
+	data(){
+		return {
+			list :null
+		}
+	},
+	template : '<div class="listView"><a v-for="item in list"><div class="menu-list"><img :src="item.img"><span>{{item.label}}</span></div></a></div>',
+	created : function(){
+		var _this = this;
+		axios.get("./data/list.json")
+			 .then(function(response){
+			 	_this.list = response.data;
+			 	console.log(response.data);
+			 })
+			 .catch(function(){
+			 	console.log(response);
+			 });
+	}
 });
 var gg = Vue.component('gg-view',{
 	data(){
@@ -17,7 +40,7 @@ var gg = Vue.component('gg-view',{
 			img3Url :'./img/4.jpg'
 		}
 	},
-	template:'<div class="gg"><div class="gg-item"><div class="gg-img"><img :src="img1Url"></div><div class="gg-name">兑换商城</div></div><div class="gg-item"><div class="gg-img"><img :src="img2Url"></div><div>广告1</div></div><div class="gg-item"><div class="gg-img"><img :src="img3Url"></div><div>广告2</div></div></div>'
+	template:'<div class="gg"><div class="gg-item"><div class="gg-img"><img :src="img1Url"></div><div class="gg-name">兑换商城</div></div><div class="gg-item"><div class="gg-img"><img :src="img2Url"></div><div class="gg-name">广告1</div></div><div class="gg-item"><div class="gg-img"><img :src="img3Url"></div><div class="gg-name">广告2</div></div></div>'
 });
 var fj = Vue.component('fj-view',{
 	data(){
@@ -41,7 +64,7 @@ var child1 = Vue.component('index-view',{
 		}
 	},
 	template:'<div class="index"><mt-header fixed title="首页"></mt-header>'
-			 +'<section class="toolbar"><div class="seat">深圳<i></i></div><div class="top-search"><mt-search></mt-search></div><div class="mess">公告</div></section>'
+			 +'<section class="toolbar"><div class="seat">深圳<i></i></div><div class="top-search"><mt-search  cancel-text=""></mt-search></div><div class="mess">公告</div></section>'
 			 +'<swiper-view></swiper-view>'
 			 +'<list-view></list-view>'
 			 +'<div class="banner"><img :src="imgUrl" alt="图片"></div>'
@@ -68,7 +91,8 @@ var temp1 ={
 	data(){
 		return {
 			selected:"index",
-			active:"tab-container1"
+			active:"tab-container1",
+			tab :null
 		}
 	},
 	template:'<div><mt-tab-container v-model="active">'
@@ -80,7 +104,10 @@ var temp1 ={
 				+'</mt-tab-container-item>'
 			+'</mt-tab-container>'
 			+'<mt-tabbar v-model="selected">'
-				+'<mt-tab-item id="index">'
+				+'<mt-tab-item v-for="item in tab" :id="item.id">'
+					+'<img slot="icon" :src="item.imgUrl">{{item.label}}'
+				+'</mt-tab-item>'
+				/*+'<mt-tab-item id="index">'
 					+'<img slot="icon"> 首页'
 				+'</mt-tab-item>'
 				+'<mt-tab-item id="car">'
@@ -88,7 +115,7 @@ var temp1 ={
 				+'</mt-tab-item>'
 				+'<mt-tab-item id="me">'
 					+'<img slot="icon" > 我的'
-				+'</mt-tab-item>'
+				+'</mt-tab-item>'*/
 			+'</mt-tabbar></div>',
 	watch:{
 		selected : function(val){
@@ -104,5 +131,14 @@ var temp1 ={
 			}
 		}
 	},
-	
+	created : function(){
+		var _this =this;
+		axios.get('./data/tab.json')
+		.then(function(response){
+			_this.tab = response.data;
+		})
+		.catch(function(response){
+			
+		});
+	}
 }

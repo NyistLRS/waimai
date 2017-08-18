@@ -1,0 +1,12 @@
+[
+{"id":"1","label":"京东超市","img":"./img/jdcs.png"},
+{"id":"2","label":"全球购","img":"./img/qqg.png"},
+{"id":"3","label":"服装城","img":"./img/fzc.png"},
+{"id":"4","label":"京东生鲜","img":"./img/jdsx.png"},
+{"id":"5","label":"京东到家","img":"./img/jddj.png"},
+{"id":"6","label":"充值缴费","img":"./img/czjf.png"},
+{"id":"7","label":"领京豆","img":"./img/ljd.png"},
+{"id":"8","label":"领劵","img":"./img/lj.png"},
+{"id":"9","label":"惠赚钱","img":"./img/hzq.png"},
+{"id":"10","label":"物流查询","img":"./img/wlcx.png"}
+]
