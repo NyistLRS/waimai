@@ -1,4 +1,4 @@
-/*  首页   */
+/*  组件 ：轮播图   */
 var swiper = Vue.component('swiper-view',{
 	data(){
 		return {
@@ -13,6 +13,7 @@ var swiper = Vue.component('swiper-view',{
 			  	+'<mt-swipe-item class="slide3"><img :src="swiper3"></mt-swipe-item>'
 			+'</mt-swipe></div>'
 });
+/* 组件 ：导航*/
 var list = Vue.component('list-view',{
 	data(){
 		return {
@@ -32,6 +33,7 @@ var list = Vue.component('list-view',{
 			 });
 	}
 });
+/* 组件: 广告*/
 var gg = Vue.component('gg-view',{
 	data(){
 		return {
@@ -42,6 +44,7 @@ var gg = Vue.component('gg-view',{
 	},
 	template:'<div class="gg"><div class="gg-item"><div class="gg-img"><img :src="img1Url"></div><div class="gg-name">兑换商城</div></div><div class="gg-item"><div class="gg-img"><img :src="img2Url"></div><div class="gg-name">广告1</div></div><div class="gg-item"><div class="gg-img"><img :src="img3Url"></div><div class="gg-name">广告2</div></div></div>'
 });
+/* 组件 ： 附近商家*/
 var fj = Vue.component('fj-view',{
 	data(){
 		return {
@@ -51,12 +54,13 @@ var fj = Vue.component('fj-view',{
 			]
 		}
 	},
-	template:'<div class="fj"><mt-header title="附件的商家"></mt-header><div class="fj-store" v-for="item in samll"><div class="store-img"><img :src="item.img"></div>'
+	template:'<div class="fj"><mt-header title="附近的商家"></mt-header><div class="fj-store" v-for="item in samll"><div class="store-img"><img :src="item.img"></div>'
 			 +'<section class="store-detail">'
 			 +'<header class="store-title"><span class="store-name">{{item.name}}</span><span>销量:{{item.sales}}</span><div class="store-range">{{item.range}}m</div></header>'
 			 +'<div class="store-mess">{{item.detail}}</div>'
 			 +'</section><span class="icon iconfont icon-more"></span></div></div>'
 });
+/* 组件 : 首页*/
 var child1 = Vue.component('index-view',{
 	data(){
 		return {
@@ -64,17 +68,27 @@ var child1 = Vue.component('index-view',{
 		}
 	},
 	template:'<div class="index"><mt-header fixed title="首页"></mt-header>'
-			 +'<section class="toolbar"><div class="seat">深圳<i></i></div><div class="top-search"><mt-search  cancel-text=""></mt-search></div><div class="mess">公告</div></section>'
+			 +'<section class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess">公告</div></section>'
 			 +'<swiper-view></swiper-view>'
 			 +'<list-view></list-view>'
 			 +'<div class="banner"><img :src="imgUrl" alt="图片"></div>'
 			 +'<gg-view></gg-view>'
 			 +'<fj-view></fj-view>'
-			 +'</div>'
+			 +'</div>',
+	 methods : {
+	 	selectSeat : function(){
+	 		this.$router.push({name:"seat"});
+	 	},
+	 	dojump : function(){
+	 		this.$router.push({name:"search"});
+	 	}
+	 }
 });
+/* 组件 ：购物车页面*/
 var child2 = Vue.component('car-view',{
 	template : '<div>这个是购物车<div class="icon iconfont icon-back"></div></div>'
 });
+/* 组件 ： 个人信息页面*/
 var child3 = Vue.component('me-view',{
 	template : '<div><mt-button type="default" @click="callme">default</mt-button><mt-button type="default" @click="messbox">default</mt-button></div>',
 	methods:{
@@ -87,6 +101,7 @@ var child3 = Vue.component('me-view',{
 		}
 	}
 });
+/* 组件 :index*/
 var temp1 ={
 	data(){
 		return {
@@ -141,4 +156,60 @@ var temp1 ={
 			
 		});
 	}
+}
+/* 通用组件：头部*/
+var header = Vue.component('my-header',{
+	props:['pagrTitle'],
+	data() {
+		return {
+		}
+	},
+	template:'<mt-header fixed :title="pagrTitle">'
+				+'<router-link to="/" slot="left">'
+			    	+'<mt-button icon="back">返回</mt-button>'
+			  	+'</router-link>'
+			  +'</mt-header>'
+});
+/* 选择城市列表 */
+var city = Vue.component('city-list',{
+	data (){
+		return {
+			city :null
+		}
+	},
+	template :'<mt-index-list>'
+				  +'<mt-index-section v-for="(item,value) in city" :index="value">'
+				    +'<mt-cell v-for="cityChild in item" :title="cityChild.cityName"></mt-cell>'
+				  +'</mt-index-section>'
+				+'</mt-index-list>',
+	created : function(){
+		var _this = this;
+		axios.get('./data/city.json')
+		.then(function(response){
+			return _this.city = response.data;
+		})
+		.catch(function(response){
+			
+		});
+	}
+});
+/* 选择城市页面 */
+var temp2 = {
+	data() {
+		return {
+			title:"选择城市",
+			position:"深圳市-广东省"
+		}
+	},
+	template :'<div class="seat-view">'
+			  +'<my-header :pagrTitle="title"></my-header>'
+			  +'<div class="position">猜您的位置是:<span>{{position}}</span></div>'
+			  +'<city-list></city-list>'
+			  +'</div>',
+	created : function(){
+	}
+}
+/* 搜索页面 */
+var searchTpl ={
+	template:'<div>搜索页面</div>'
 }

@@ -3,6 +3,7 @@ html{
 }
  body {
  	font-size: .14rem;
+ 	font-family: normal normal normal normal 16px / normal Arial, Helvetica, sans-serif;
  	}
 html,body{
 	height: 100%;
@@ -21,15 +22,39 @@ html,body{
  #app .mint-tabbar{
 	position: fixed;
 }
-.index{
-	padding-top: .4rem;
-}
-.index .mint-header{
+.mint-header{
+	font-size: .16rem;
 	background-color: white;
 	color: #333;
+}
+.index .mint-header.is-fixed{
+	border-bottom: transparent;
+}
+.mint-header.is-fixed{
+	color: white;
+	background-color: #E24267;
+	border-bottom: .01rem solid lightgray;
+}
+.mint-header-title{
+	font-weight: 600;
+}
+.mint-indexlist-navitem{
+	padding: 2px;
+}
+.mint-indexlist-nav{
+	border-left: none;
+}
+.index{
+	padding-top: .8rem;
+}
+.index .mint-header{
 	font-family: "微软雅黑";
 }
 .toolbar{
+	position: fixed;
+	z-index: 1;
+	background-color: white;
+	top: .4rem;
 	height: .4rem;
 	width: 100%;
 	display: flex;
@@ -55,6 +80,31 @@ html,body{
 .top-search{
 	height: 100%;
 	flex: auto;
+	box-sizing: border-box;
+	padding: .06rem .1rem;
+	background: lightgray;
+}
+.top-search .search-box{
+	height: 100%;
+	width: 100%;
+	position: relative;
+	background: white;
+	border-radius: .05rem;
+	padding-left: .2rem;
+	padding-bottom: .02rem;
+}
+.top-search .search-box i{
+	position: absolute;
+	left: 0;
+	font-size: .12rem;
+	padding: .08rem .06rem;
+}
+.top-search input{
+	width: 100%;
+	height: 100%;
+	border-radius: .05rem;
+	border: none;
+	outline: none;
 }
 .top-search .mint-search{
 	height: 100%;
@@ -196,11 +246,14 @@ html,body{
 	display: inline-block;
 	font-family:"微软雅黑";
 	font-weight: 600;
-	width:50% ;
+	width:40% ;
 	overflow: hidden;
 	margin-right:.1rem ;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+.index .mint-searchbar-cancel{
+	margin-left: 0;
 }
 .store-title .store-range{
 	float: right;
@@ -212,6 +265,46 @@ html,body{
 	margin-top: .1rem;
 	padding-right: .3rem;
 }
+/* 除去a点击时背景 */
+a,a:hover,a:active,a:visited,a:link,a:focus{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	outline:none;
+	background: none;
+	text-decoration: none;
+}
 .mint-tabbar > .mint-tab-item.is-selected{
 	color: red;
+}
+.seat-view{
+	padding-top: .8rem;
+}
+.position{
+	position: fixed;
+	top: .4rem;
+	left: 0;
+	right: 0;
+	color: #2f2f2f;
+	font-size: .15rem;
+	height: .4rem;
+	line-height: .4rem;
+	padding-left: .1rem;
+	width: 100%;
+	z-index: 1;
+	background-color: white;
+}
+.mint-indexlist-content{
+	min-height:100%!important;
+}
+.mint-indexlist-nav{
+	position: fixed;
+}
+.position span{
+	color: lightpink;
+}
+.mint-indexsection-index{
+	color: #999;
+	box-sizing: border-box;
+	height: .3rem;
+	background-color: #eee;
 }
