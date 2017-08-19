@@ -2,7 +2,11 @@
 			routes:[
 				{path:'/',component:temp1},
 				{path:'/seat',component:temp2,name:'seat'},
-				{path:'/search',component:searchTpl,name:"search"}
+				{path:'/search',component:searchTpl,name:"search"},
+				{path:"/list",component:listTpl,name:"list"},
+				{path:"/gg",component:ggTpl},
+				{path:"/fj",component:fjTpl},
+				{path:"/swiper",component:swiperTpl}
 			]
 		});
 		new Vue({

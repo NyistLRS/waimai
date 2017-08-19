@@ -8,9 +8,9 @@ var swiper = Vue.component('swiper-view',{
 		}
 	},
 	template:'<div class="my-swiper"><mt-swipe :auto="4000">'
-			  	+'<mt-swipe-item class="slide1"><img :src="swiper1"></mt-swipe-item>'
-			  	+'<mt-swipe-item class="slide2"><img :src="swiper2"></mt-swipe-item>'
-			  	+'<mt-swipe-item class="slide3"><img :src="swiper3"></mt-swipe-item>'
+			  	+'<mt-swipe-item class="slide1"><router-link to="/swiper"><img :src="swiper1"></router-link ></mt-swipe-item>'
+			  	+'<mt-swipe-item class="slide2"><router-link to="/swiper"><img :src="swiper2"></router-link ></mt-swipe-item>'
+			  	+'<mt-swipe-item class="slide3"><router-link to="/swiper"><img :src="swiper3"></router-link ></mt-swipe-item>'
 			+'</mt-swipe></div>'
 });
 /* 组件 ：导航*/
@@ -20,7 +20,7 @@ var list = Vue.component('list-view',{
 			list :null
 		}
 	},
-	template : '<div class="listView"><a v-for="item in list"><div class="menu-list"><img :src="item.img"><span>{{item.label}}</span></div></a></div>',
+	template : '<div class="listView"><div v-for="item in list" class="listBox"><router-link to="/list"><div class="menu-list"><img :src="item.img"><span>{{item.label}}</span></div></router-link></div></div>',
 	created : function(){
 		var _this = this;
 		axios.get("./data/list.json")
@@ -42,23 +42,25 @@ var gg = Vue.component('gg-view',{
 			img3Url :'./img/4.jpg'
 		}
 	},
-	template:'<div class="gg"><div class="gg-item"><div class="gg-img"><img :src="img1Url"></div><div class="gg-name">兑换商城</div></div><div class="gg-item"><div class="gg-img"><img :src="img2Url"></div><div class="gg-name">广告1</div></div><div class="gg-item"><div class="gg-img"><img :src="img3Url"></div><div class="gg-name">广告2</div></div></div>'
+	template:'<div class="gg"><router-link to="/gg"><div class="gg-item"><div class="gg-img"><img :src="img1Url"></div><div class="gg-name">兑换商城</div></div></router-link><router-link to="/gg"><div class="gg-item"><div class="gg-img"><img :src="img2Url"></div><div class="gg-name">广告1</div></div></router-link><router-link to="/gg"><div class="gg-item"><div class="gg-img"><img :src="img3Url"></div><div class="gg-name">广告2</div></div></router-link></div>'
 });
 /* 组件 ： 附近商家*/
 var fj = Vue.component('fj-view',{
+	props :['isHeader'],
 	data(){
 		return {
 			samll :[
 			{img:"./img/sd1.png",name:'Lexus深圳湾店',detail:"这个店的东西很好吃",sales:"1000",range:"400"},
 			{img:"./img/sd2.jpeg",name:'Lexus深圳湾店',detail:"这店的服务很到位",sales:"1000",range:"400"}
-			]
+			],
+			showHeader:this.isHeader
 		}
 	},
-	template:'<div class="fj"><mt-header title="附近的商家"></mt-header><div class="fj-store" v-for="item in samll"><div class="store-img"><img :src="item.img"></div>'
+	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="item in samll" fj-store><router-link to="/fj"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
 			 +'<section class="store-detail">'
 			 +'<header class="store-title"><span class="store-name">{{item.name}}</span><span>销量:{{item.sales}}</span><div class="store-range">{{item.range}}m</div></header>'
 			 +'<div class="store-mess">{{item.detail}}</div>'
-			 +'</section><span class="icon iconfont icon-more"></span></div></div>'
+			 +'</section><span class="icon iconfont icon-more"></span></div></router-link></div></div>'
 });
 /* 组件 : 首页*/
 var child1 = Vue.component('index-view',{
@@ -68,12 +70,12 @@ var child1 = Vue.component('index-view',{
 		}
 	},
 	template:'<div class="index"><mt-header fixed title="首页"></mt-header>'
-			 +'<section class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess">公告</div></section>'
+			 +'<section class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess" @click="tongzhi()">公告</div></section>'
 			 +'<swiper-view></swiper-view>'
 			 +'<list-view></list-view>'
 			 +'<div class="banner"><img :src="imgUrl" alt="图片"></div>'
 			 +'<gg-view></gg-view>'
-			 +'<fj-view></fj-view>'
+			 +'<fj-view :isHeader="true"></fj-view>'
 			 +'</div>',
 	 methods : {
 	 	selectSeat : function(){
@@ -81,16 +83,61 @@ var child1 = Vue.component('index-view',{
 	 	},
 	 	dojump : function(){
 	 		this.$router.push({name:"search"});
+	 	},
+	 	tongzhi : function(){
+	 		
 	 	}
 	 }
 });
 /* 组件 ：购物车页面*/
 var child2 = Vue.component('car-view',{
-	template : '<div>这个是购物车<div class="icon iconfont icon-back"></div></div>'
+	data (){
+		return {
+			"list" :[{"name":"麦兜旗舰店","sp":[{"spName":"夏季休闲裤","price":"100","num":"1"},{"spName":"冬装羽绒服","price":"200","num":"2"}]},{"name":"嘟嘟旗舰店","sp":[{"spName":"香奈儿香水","price":"200","num":"1"},{"spName":"行楷字帖,大师临摹","price":"38","num":"3"}]}],
+			options : [{  
+            label: '选项A',  
+            value: 'A',  
+            disabled: true  //可以禁用选项  
+            },  
+            {  
+            label: '选项B',  
+            value: 'B',  
+            disabled: true  
+            },  
+            {  
+            label: '选项C',  
+            value: 'C'  
+            },  
+            {  
+            label: '选项D',  
+            value: 'D'  
+            }]  
+		}
+	},
+	template : '<div><mt-header fixed title="购物车"><mt-button slot="right">编辑</mt-button></mt-header>'
+			   +'<div>'
+			   +'</div>'
+			   +'</div>'
 });
 /* 组件 ： 个人信息页面*/
 var child3 = Vue.component('me-view',{
-	template : '<div><mt-button type="default" @click="callme">default</mt-button><mt-button type="default" @click="messbox">default</mt-button></div>',
+	data (){
+		return {
+			customImg:"./img/custom.jpg"
+		}
+	},
+	template : '<div class="hyzx"><mt-header fixed title="会员中心"></mt-header>'
+				+'<div class="grmes"><div class="custom-img"><img :src="customImg"></div><div class="custom-mes"><span class="custom-name">罗荣盛</span><i class="icon iconfont icon-more"></i></div></div>'
+				+'<div class="f-mes">'
+				+'<div class="f-item"><ul><li><i class="icon iconfont icon-favoritesfilling"></i></li><li>福心</li><li>2</li></ul></div>'
+				+'<div class="f-item"><ul><li><i class="icon iconfont icon-onepage48"></i></li><li>可用福分</li><li>199.99</li></ul></div>'
+				+'<div class="f-item"><ul><li><i class="icon iconfont icon-creditlevelfilling"></i></li><li>昨日福分值</li><li>4</li></ul></div><i class="icon iconfont icon-more f-mes-more"></i></div>'
+				+'<div class="sc"><div class="sc-item"><ul><li>3</li><li>商品收藏</li></ul></div>'
+				+'<div class="sc-item"><ul><li>5</li><li>店铺收藏</li></ul></div><div class="sc-item"></div></div>'
+				+'<mt-cell title="我的订单" is-link><img slot="icon" src="./img/wddd.png" width="24" height="24"></mt-cell>'
+				+'<mt-cell title="我的推荐" is-link><img slot="icon" src="./img/wdtj.png" width="24" height="24"></mt-cell>'
+				+'<mt-cell title="兑换商城" is-link><img slot="icon" src="./img/dhsc.png" width="24" height="24"></mt-cell>'
+				+'</div>',
 	methods:{
 		callme : function(){
 			this.$toast('好难啊')
@@ -212,4 +259,24 @@ var temp2 = {
 /* 搜索页面 */
 var searchTpl ={
 	template:'<div>搜索页面</div>'
+}
+var listTpl = {
+	data (){
+		return {
+			title:"京东超市"	
+		}
+	},
+	template :'<div class="feilei"><my-header :pagrTitle="title"></my-header>'
+			  +'<mt-search></mt-search>'
+			  +'<fj-view :isHeader="false"></fj-view>'
+			  +'</div>'
+}
+var ggTpl = {
+	template : '<div>广告路由</div>'
+}
+var fjTpl ={
+	template : '<div>附件商家路由</div>'
+}
+var swiperTpl = {
+	template : '<div>录播图路由</div>'
 }

@@ -13,6 +13,9 @@ html,body{
  	margin: 0;
  	padding: 0;
  }
+ ul{
+ 	list-style: none;
+ }
  div,section,article,header,footer{
  	box-sizing: border-box;
  }
@@ -23,9 +26,15 @@ html,body{
 	position: fixed;
 }
 .mint-header{
-	font-size: .16rem;
+	font-size: .20rem;
 	background-color: white;
 	color: #333;
+}
+.mint-header-button{
+	font-size: .16rem;
+}
+.mint-button-text,.mint-button-icon{
+	color: white;
 }
 .index .mint-header.is-fixed{
 	border-bottom: transparent;
@@ -81,7 +90,7 @@ html,body{
 	height: 100%;
 	flex: auto;
 	box-sizing: border-box;
-	padding: .06rem .1rem;
+	padding: .08rem .1rem;
 	background: lightgray;
 }
 .top-search .search-box{
@@ -97,16 +106,16 @@ html,body{
 	position: absolute;
 	left: 0;
 	font-size: .12rem;
-	padding: .08rem .06rem;
+	padding: .05rem .06rem;
 }
 .top-search input{
-	width: 100%;
-	height: 100%;
+	width: 90%;
+	height: 80%;
 	border-radius: .05rem;
 	border: none;
 	outline: none;
 }
-.top-search .mint-search{
+.mint-search{
 	height: 100%;
 }
 .top-search .mint-searchbar{
@@ -154,7 +163,7 @@ html,body{
 	align-content: flex-start;
 	/*background: paleturquoise;*/
 }
-.listView a{
+.listView .listBox{
 	box-sizing: border-box;
 	height: 50%;
 	width: 20%;
@@ -204,7 +213,7 @@ html,body{
 .fj{
 	margin-bottom: .3rem;
 }
-.fj-store{
+.fj-store-item{
 	display: flex;
 	height: 1.1rem;
 	line-height: 1.1rem;
@@ -269,6 +278,7 @@ html,body{
 a,a:hover,a:active,a:visited,a:link,a:focus{
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
 	-webkit-tap-highlight-color: transparent;
+	color: black;
 	outline:none;
 	background: none;
 	text-decoration: none;
@@ -307,4 +317,96 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	box-sizing: border-box;
 	height: .3rem;
 	background-color: #eee;
+}
+/*  会员中心*/
+.hyzx{
+	padding-top: .4rem;
+}
+.grmes{
+	height: 1.2rem;
+	line-height: 1.2rem;
+	width: 100%;
+	display: flex;
+	background-color: lightgray;
+}
+.custom-img{
+	height: 100%;
+	width: 39%;
+	padding: .2rem .3rem .1rem;
+	box-sizing: border-box;
+}
+.custom-img img{
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+}
+.custom-mes{
+	flex: auto;
+	color: white;
+	font-size: .2rem;
+	position: relative;
+}
+.custom-mes .custom-name {
+}
+.custom-mes i{
+	position: absolute;
+	right: .2rem;
+    font-weight: 600;
+    font-size: .2rem;
+}
+.f-mes,.sc{
+	height: 1.2rem;
+	width: 100%;
+	position: relative;
+	display: flex;
+	box-sizing: border-box;
+	padding-right: .4rem;
+	border-bottom: .01rem solid lavender;
+}
+.f-mes div.f-item,.sc div.sc-item{
+	-webkit-flex: 1;
+	flex: 1;
+	padding: .2rem 0;
+	text-align: center;
+}
+.f-item ul{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+}
+.f-item ul li{
+	flex: 1;
+	padding-bottom: .03rem;
+}
+.f-item i{
+	font-size: .24rem;
+}
+.f-mes i.f-mes-more{
+	position: absolute;
+	right: .16rem;
+	font-weight: 600;
+	font-size: .36rem;
+	line-height: 1.2rem;
+}
+.sc{
+	height: .6rem;
+	width: 100%;
+	border-bottom: none;
+}
+.sc div.sc-item{
+	padding: .1rem 0;
+}
+.mint-cell-text{
+	padding-left: .1rem;
+}
+.mint-cell-allow-right::after{
+	right: .4rem;
+	border-color: black;
+}
+
+/*************************************/
+.feilei{
+	padding-top: .4rem;
 }
