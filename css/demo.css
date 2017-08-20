@@ -467,6 +467,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	bottom: .55rem;
 	left: 0;
 	right: 0;
+	z-index: 1;
 	border-top: .01rem solid lightblue;
 }
 .sp-count .sd-name{
