@@ -31,7 +31,7 @@ html,body{
 	color: #333;
 }
 .padding40{
-	padding-top:.4rem ;
+	padding:.4rem 0 .95rem 0;
 }
 .mint-header-button{
 	font-size: .16rem;
