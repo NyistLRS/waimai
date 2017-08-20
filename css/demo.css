@@ -30,6 +30,9 @@ html,body{
 	background-color: white;
 	color: #333;
 }
+.padding40{
+	padding-top:.4rem ;
+}
 .mint-header-button{
 	font-size: .16rem;
 }
@@ -409,4 +412,97 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 /*************************************/
 .feilei{
 	padding-top: .4rem;
+}
+
+/*  购物车 */
+.mint-checkbox-core{
+	width: 16px;
+	height: 16px;
+}
+.mint-checklist .mint-cell{
+	min-height: .4rem;
+}
+.mint-checklist-title{
+	margin: 0;
+}
+.sd{
+	border-bottom: .01rem solid lightcyan;
+}
+.sd-sp-list{
+	display: flex;
+	height: 100%;
+	align-items: center;
+}
+.sd-sp-list .mint-checkbox-label{
+	margin: 0;
+	display: block;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+.sd-checkbox{
+	width: 10%;
+}
+.sd-name{
+	flex: auto;
+	height: 100%;
+	display: flex;
+	padding: .1rem .2rem;
+	font-family: "Microsoft YaHei", SimSun, verdana
+}
+.sp-detail{
+	height: .86rem;
+}
+.sp-detail:last-child{
+	border-bottom: .01rem solid lightgray;
+	margin-bottom: .2rem;
+}
+.sp-detail .mint-cell-wrapper,.sd-sp-list .mint-cell-wrapper,.sp-detail .mint-cell:last-child,.sd-sp-list .mint-cell:last-child {
+	background-image: none;
+}
+.sp-count{
+	position: fixed;
+	height: .4rem;
+	line-height: .4rem;
+	bottom: .55rem;
+	left: 0;
+	right: 0;
+	border-top: .01rem solid lightblue;
+}
+.sp-count .sd-name{
+	padding: 0 .1rem;
+}
+.sp-count .sd-name span{
+	width: 10%;
+}
+.count-mes{
+	flex: auto;
+	display: flex;
+}
+.count-mes div{
+	flex: 1;
+}
+.oper-count{
+	text-align: right;
+}
+.priceCountNum{
+	color: red;
+}
+.sp-detail-img{
+	height: 100%;
+    width: .65rem;
+}
+.sp-mes{
+	flex: auto;
+	padding-top: .04rem;
+}
+.sp-size{
+	width: 15%;
+	text-align: center;
+}
+.sp-size div{
+	padding: .05rem 0;
+}
+.red-font{
+	color: red;
 }

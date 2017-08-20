@@ -56,7 +56,7 @@ var fj = Vue.component('fj-view',{
 			showHeader:this.isHeader
 		}
 	},
-	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="item in samll" fj-store><router-link to="/fj"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
+	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="(item,index) in samll" fj-store><router-link to="/fj"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
 			 +'<section class="store-detail">'
 			 +'<header class="store-title"><span class="store-name">{{item.name}}</span><span>销量:{{item.sales}}</span><div class="store-range">{{item.range}}m</div></header>'
 			 +'<div class="store-mess">{{item.detail}}</div>'
@@ -93,31 +93,66 @@ var child1 = Vue.component('index-view',{
 var child2 = Vue.component('car-view',{
 	data (){
 		return {
-			"list" :[{"name":"麦兜旗舰店","sp":[{"spName":"夏季休闲裤","price":"100","num":"1"},{"spName":"冬装羽绒服","price":"200","num":"2"}]},{"name":"嘟嘟旗舰店","sp":[{"spName":"香奈儿香水","price":"200","num":"1"},{"spName":"行楷字帖,大师临摹","price":"38","num":"3"}]}],
+			value:[],
+			size:"1",
+			priceCount:0,
+			price:0,
+			list :[{"name":"麦兜旗舰店","sp":[{"spName":"夏季休闲裤","price":"100","num":"1","img":"./img/sp1.jpg"},{"spName":"冬装羽绒服","price":"200","num":"2","img":"./img/sp2.jpg"}]},{"name":"嘟嘟旗舰店","sp":[{"spName":"香奈儿香水","price":"200","num":"1","img":"./img/sp3.jpg"},{"spName":"行楷字帖,大师临摹","price":"38","num":"3","img":"./img/sp2.jpg"}]}],
 			options : [{  
-            label: '选项A',  
-            value: 'A',  
-            disabled: true  //可以禁用选项  
-            },  
-            {  
-            label: '选项B',  
-            value: 'B',  
-            disabled: true  
-            },  
-            {  
-            label: '选项C',  
-            value: 'C'  
-            },  
-            {  
-            label: '选项D',  
-            value: 'D'  
-            }]  
+            value: 'A'
+           }],
+           selectValue:[],
+           checkName :[]
 		}
 	},
-	template : '<div><mt-header fixed title="购物车"><mt-button slot="right">编辑</mt-button></mt-header>'
-			   +'<div>'
-			   +'</div>'
-			   +'</div>'
+	template : '<section class="padding40"><mt-header fixed title="购物车"><mt-button slot="right">编辑</mt-button></mt-header>'
+			   +'<div v-for="(item,key) in list">'
+			   +'<div class="sd-sp-list sd">'
+			   +'<mt-checklist class="sd-checkbox " v-model="value" :options="[\'\']"></mt-checklist><div class="sd-name">{{item.name}}</div></div>'
+			   +'<div class="sd-sp-list sp-detail" v-for="(item1,key1) in item.sp"><mt-checklist class="sd-checkbox " v-model="value" :options="[item1.spName]"></mt-checklist>'
+			   +'<div class="sd-name"><div class="sp-detail-img"><img :src="item1.img"></div><div class="sp-mes">{{item1.spName}}{{value}}</div><div class="sp-size"><div class="red-font">{{item1.price |formatPrice}}</div><div>{{item1.num}}</div></div></div></div>'
+			   +'</div><section class="sp-count"><div class="sd-sp-list"><mt-checklist class="sd-checkbox " v-model="value" :options="[\'all\']"></mt-checklist>'
+			   +'<div class="sd-name"><span>全选</span>'
+			   +'<div class="count-mes"><div></div><div class="price-count">合计：<span class="priceCountNum">{{price|formatPrice}}</span></div><div class="oper-count"><mt-button type="danger"  size="small">结算({{size}})</mt-button></div></div></div></div></section></div>'
+			   +'</section>',
+    filters :{
+    	formatPrice : function(val){
+    		return '¥' + parseFloat(val).toFixed(2);
+    	}
+    },
+    methods:{
+    	getPrice : function(){
+    		
+    	}
+    },
+    watch :{
+    	value :function(newValue,oldValue){
+    		if(newValue == 'all'){// 全选
+    			return this.value = this.checkName,this.price =this.priceCount;
+    		}
+    		if(newValue.length != this.checkName.length){
+    			if(newValue.indexOf("all") >= 0){
+    				console.log(newValue);
+    				 return this.value = newValue.join(',').replace('all',' ').trim().split(',');
+    			}
+    		}
+    		if(oldValue.indexOf("all") >=0 && newValue.indexOf("all") < 0){ // 取消全选
+    			return this.value = [],this.price=0;
+    		}
+    	}
+    },
+    created :function(){
+    	var price =0;
+    	for(var key in this.list){
+			this.checkName.push(this.list[key].name);
+			for(var i in this.list[key].sp){
+				this.checkName.push(this.list[key].sp[i].spName);
+				 price = parseFloat(this.list[key].sp[i].price)*parseFloat(this.list[key].sp[i].num);
+				this.priceCount += price;
+			}
+		}
+    	this.checkName.push("all");
+    }
 });
 /* 组件 ： 个人信息页面*/
 var child3 = Vue.component('me-view',{
@@ -254,6 +289,7 @@ var temp2 = {
 			  +'<city-list></city-list>'
 			  +'</div>',
 	created : function(){
+		
 	}
 }
 /* 搜索页面 */
@@ -277,6 +313,25 @@ var ggTpl = {
 var fjTpl ={
 	template : '<div>附件商家路由</div>'
 }
+/* 轮播图路由 */
 var swiperTpl = {
-	template : '<div>录播图路由</div>'
+	data(){
+		return {
+			value:[],
+			options:[{
+					label:"选项A",
+					value:"A"
+				},
+				{
+					label:"选项B",
+					value:"B"
+				},
+				{
+					label:"选项C",
+					value :"C"
+				}
+			]
+		}
+	},
+	template : '<div><mt-checklist title="复选框标题" v-model="value" :options="options"></mt-checklist></div>'
 }
