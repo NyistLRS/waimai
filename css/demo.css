@@ -468,6 +468,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	left: 0;
 	right: 0;
 	z-index: 1;
+	background-color: white;
 	border-top: .01rem solid lightblue;
 }
 .sp-count .sd-name{
