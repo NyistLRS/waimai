@@ -482,6 +482,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .count-mes div{
 	flex: 1;
+	white-space: nowrap;
 }
 .oper-count{
 	text-align: right;
