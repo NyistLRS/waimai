@@ -6,7 +6,8 @@
 				{path:"/list",component:listTpl,name:"list"},
 				{path:"/gg",component:ggTpl},
 				{path:"/fj",component:fjTpl},
-				{path:"/swiper",component:swiperTpl}
+				{path:"/swiper",component:swiperTpl},
+				{path:"/recommend",component:recommendTpl}
 			]
 		});
 		new Vue({

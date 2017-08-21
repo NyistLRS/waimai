@@ -170,7 +170,7 @@ var child3 = Vue.component('me-view',{
 				+'<div class="sc"><div class="sc-item"><ul><li>3</li><li>商品收藏</li></ul></div>'
 				+'<div class="sc-item"><ul><li>5</li><li>店铺收藏</li></ul></div><div class="sc-item"></div></div>'
 				+'<mt-cell title="我的订单" is-link><img slot="icon" src="./img/wddd.png" width="24" height="24"></mt-cell>'
-				+'<mt-cell title="我的推荐" is-link><img slot="icon" src="./img/wdtj.png" width="24" height="24"></mt-cell>'
+				+'<router-link to="/recommend"><mt-cell title="我的推荐" is-link><img slot="icon" src="./img/wdtj.png" width="24" height="24"></mt-cell></router-link>'
 				+'<mt-cell title="兑换商城" is-link><img slot="icon" src="./img/dhsc.png" width="24" height="24"></mt-cell>'
 				+'</div>',
 	methods:{
@@ -241,12 +241,12 @@ var temp1 ={
 }
 /* 通用组件：头部*/
 var header = Vue.component('my-header',{
-	props:['pagrTitle'],
+	props:['pageTitle'],
 	data() {
 		return {
 		}
 	},
-	template:'<mt-header fixed :title="pagrTitle">'
+	template:'<mt-header fixed :title="pageTitle">'
 				+'<router-link to="/" slot="left">'
 			    	+'<mt-button icon="back">返回</mt-button>'
 			  	+'</router-link>'
@@ -275,6 +275,17 @@ var city = Vue.component('city-list',{
 		});
 	}
 });
+/* 组件 : 推荐列表 */
+var recommendList = Vue.component('recommed-list',{
+	data(){
+		return {
+			recommendList :[{"imgUrl":"./img/user1.jpg","recdNmae":"张三","datetime":"2017-07-01"},{"imgUrl":"./img/user2.jpg","recdNmae":"张三","datetime":"2017-07-01"}]	
+		}
+	},
+	template : '<section class="recommend-list">'
+			   +'<div class="recommend-list-item" v-for="(item,key) in recommendList"><div class="recommnd-img"><img :src="item.imgUrl"></div><div class="recommend-mes"><div class="recdName">{{item.recdNmae}}</div><div class="datetime">{{item.datetime}}</div></div></div>'
+			   +'</section>'
+})
 /* 选择城市页面 */
 var temp2 = {
 	data() {
@@ -284,7 +295,7 @@ var temp2 = {
 		}
 	},
 	template :'<div class="seat-view">'
-			  +'<my-header :pagrTitle="title"></my-header>'
+			  +'<my-header :pageTitle="title"></my-header>'
 			  +'<div class="position">猜您的位置是:<span>{{position}}</span></div>'
 			  +'<city-list></city-list>'
 			  +'</div>',
@@ -302,7 +313,7 @@ var listTpl = {
 			title:"京东超市"	
 		}
 	},
-	template :'<div class="feilei"><my-header :pagrTitle="title"></my-header>'
+	template :'<div class="feilei"><my-header :pageTitle="title"></my-header>'
 			  +'<mt-search></mt-search>'
 			  +'<fj-view :isHeader="false"></fj-view>'
 			  +'</div>'
@@ -335,3 +346,22 @@ var swiperTpl = {
 	},
 	template : '<div><mt-checklist title="复选框标题" v-model="value" :options="options"></mt-checklist></div>'
 }
+var recommendTpl = {
+	data (){
+		return{
+			title:"我的推荐"
+		}
+	},
+	template :'<section class="recommend">'
+			  +'<my-header :pageTitle="title"></my-header>'
+			  +'<section class="self-mes">'
+			  +'<div class="self-mes-item"><div>我的邀请码</div><div>12345z<i class="icon iconfont icon-more"></i></div></div>'
+			  +'<div class="self-mes-item"><div>我的推荐</div><div>100</div></div>'
+			  +'<div class="self-mes-item"><div>今日消费</div><div>30000.00(元)</div></div>'
+			  +'</section>'
+			  +'<mt-cell title="推荐列表"></mt-cell>'
+			  +'<recommed-list></recommed-list>'
+			  +'</section>'
+	
+}
+

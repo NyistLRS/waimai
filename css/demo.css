@@ -457,7 +457,18 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	border-bottom: .01rem solid lightgray;
 	margin-bottom: .2rem;
 }
-.sp-detail .mint-cell-wrapper,.sd-sp-list .mint-cell-wrapper,.sp-detail .mint-cell:last-child,.sd-sp-list .mint-cell:last-child {
+.mint-cell-wrapper{
+	background-image: none;
+}
+.mint-cell{
+	margin-top: -.01rem;
+	border-top: .01rem solid lightgray;
+	border-bottom: .01rem solid lightgray;
+}
+.sd-sp-list .mint-cell{
+	border: none;
+}
+.sp-detail .mint-cell-wrapper,.sd-sp-list .mint-cell-wrapper,.sp-detail .mint-cell:last-child,.sd-sp-list .mint-cell:last-child,.hyzx .mint-cell:last-child{
 	background-image: none;
 }
 .sp-count{
@@ -508,4 +519,63 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .red-font{
 	color: red;
+}
+/* 我的推荐*/
+.recommend{
+	padding-top:.4rem ;
+}
+.self-mes{
+	height: 1rem;
+	display: flex;
+	box-sizing: border-box;
+	padding: .13rem 0;
+}
+.self-mes-item{
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+.self-mes-item div{
+	flex: 1;
+	width: 100%;
+	position: relative;
+}
+.self-mes-item div i{
+	font-size: .16rem;
+	color: black;
+	margin-left: .05rem;
+	font-weight: 600;	
+}
+.recommend-list{
+	
+}
+.recommend-list-item{
+	height: 1rem;
+	line-height: 1rem;
+	width: 100%;
+	display: flex;
+	border-bottom: .01rem solid lightgray;
+	padding: .02rem;
+}
+.recommend-list-item .recommnd-img{
+	height: 100%;
+	width: 22%;
+}
+.recommend-list-item img{
+	height: 100%;
+	width: 100%;
+}
+.recommend-list-item .recommend-mes{
+	flex: auto;
+	display: flex;
+}
+.recommend-list-item .recommend-mes div{
+	flex: 1;
+}
+.recommend-list-item .recommend-mes .datetime{
+	text-align: center;
+}
+.recommend-list-item .recommend-mes .recdName{
+	padding-left: .3rem;
 }
