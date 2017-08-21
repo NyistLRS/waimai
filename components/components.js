@@ -169,7 +169,7 @@ var child3 = Vue.component('me-view',{
 				+'<div class="f-item"><ul><li><i class="icon iconfont icon-creditlevelfilling"></i></li><li>昨日福分值</li><li>4</li></ul></div><i class="icon iconfont icon-more f-mes-more"></i></div>'
 				+'<div class="sc"><div class="sc-item"><ul><li>3</li><li>商品收藏</li></ul></div>'
 				+'<div class="sc-item"><ul><li>5</li><li>店铺收藏</li></ul></div><div class="sc-item"></div></div>'
-				+'<mt-cell title="我的订单" is-link><img slot="icon" src="./img/wddd.png" width="24" height="24"></mt-cell>'
+				+'<router-link to="/login"><mt-cell title="我的订单" is-link><img slot="icon" src="./img/wddd.png" width="24" height="24"></mt-cell></router-link>'
 				+'<router-link to="/recommend"><mt-cell title="我的推荐" is-link><img slot="icon" src="./img/wdtj.png" width="24" height="24"></mt-cell></router-link>'
 				+'<mt-cell title="兑换商城" is-link><img slot="icon" src="./img/dhsc.png" width="24" height="24"></mt-cell>'
 				+'</div>',
@@ -364,4 +364,52 @@ var recommendTpl = {
 			  +'</section>'
 	
 }
-
+var loginTpl = {
+	data (){
+		return {
+			pagetitle:"登录",
+			bannerImg:"./img/login.jpg",
+			popupVisible:false,
+			loginType:"",
+			visibleItemCount:3,
+			selectTypeValue :"",
+			slots: [{flex:1,values: ['大众会员','黄金会员', '白金会员', '钻石会员', '超级会员'],className: 'slot1',defaultIndex:0}]
+		}
+	},
+	template :'<section class="login-view">'
+			 +'<my-header :pageTitle="pagetitle"></my-header>'
+			 +'<div class="login-banner"><img :src="bannerImg"></div>'
+			 +'<form><div class="login-mes"><div class="login-label">登录类型</div><div class="login-input"><input type="text" v-model="loginType" placeholder="会员" @click="changeType(loginType)"/></div></div>'
+			 +'<div class="login-mes"><div class="login-label">手机号码</div><div class="login-input"><input type="text"/></div></div>'
+			 +'<div class="login-mes"><div class="login-label">密码</div><div class="login-input"><input type="password"/></div></div>'
+			 +'<mt-popup v-if="popupVisible" v-model="popupVisible" position="bottom" class="mint-popup-4">'
+			 +'<div class="height40"><div class="type-oper" @click="cacelModal">取消</div><div class="center"></div><div class="type-oper success" @click="selectType">完成</div></div>'
+			 +'<mt-picker :slots="slots" @change="onValuesChange" :visible-item-count="visibleItemCount"></mt-picker></mt-popup>'
+			 +'<div class="btn"><mt-button size="small">登录</mt-button></div>'
+			 +'</form>'
+			 +'<div class="other-oper"><div class="other-oper-item re"><mt-button size="small">注册</mt-button></div><div class="other-oper-item"><mt-button size="small">忘记密码</mt-button></div></div>'
+			 +'</section>',
+	 methods:{
+	 	changeType : function(val){
+	 		this.popupVisible = true;
+	 	},
+	 	onValuesChange : function(picker,values){
+	 		if (values[0] == undefined) {
+	 			if(this.loginType == ''){
+	 				picker.values[0]=this.slots[0].values[0];
+	 			}else{
+	 				picker.values[0] = this.loginType;
+	 			}
+      		}
+	 		this.selectTypeValue = values[0];
+	 	},
+	 	selectType :function(){
+	 		console.log(this.selectTypeValue);
+	 		this.popupVisible =false;
+	 		this.loginType = this.selectTypeValue;
+	 	},
+	 	cacelModal : function(){
+	 		this.popupVisible = false;
+	 	}
+	 }
+}

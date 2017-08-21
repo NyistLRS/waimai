@@ -579,3 +579,86 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .recommend-list-item .recommend-mes .recdName{
 	padding-left: .3rem;
 }
+/* 登录界面 */
+.login-view{
+	padding-top: .4rem;
+}
+.login-banner{
+	height: 1rem;
+	margin-top: .05rem;
+}
+.login-banner img{
+	height: 100%;
+	width: 100%;
+}
+.login-view form{
+	padding: .05rem;
+}
+.login-mes{
+	height: .8rem;
+	line-height: .8rem;
+	display: flex;
+}
+.login-mes .login-label{
+	width: 30%;
+	text-align: right;
+}
+.login-mes .login-input{
+	flex: auto;
+	padding-left: .2rem;
+}
+.login-mes .login-input input{
+	height: .28rem;
+	padding-left: .1rem;
+	border-radius: .04rem;
+	box-shadow: none;
+	outline: none;
+	border: .01rem solid lightgray;
+}
+.mint-popup-4{
+	width: 100%;
+}
+.height40{
+	height: .4rem;
+	line-height: .4rem;
+	display: flex;
+	background-color: lightgray;
+	opacity: .6;
+}
+.height40 div.center{
+	flex: auto;
+}
+.height40 div.type-oper{
+	width: .6rem;
+	text-align: center;
+}
+.height40 div.type-oper.success{
+	color: deepskyblue;
+}
+.btn{
+	text-align: center;
+	padding: .2rem 0;
+}
+.btn .mint-button{
+	padding: 0 .24rem;
+}
+.other-oper .mint-button,.btn .mint-button{
+	background-color: white;
+    box-shadow: none;
+    border:.01rem solid lightgray;
+}
+.other-oper .mint-button-text, .other-oper .mint-button-icon,.btn .mint-button-text,.btn .mint-button-icon{
+	color: gray;
+}
+.other-oper{
+	margin-top: .3rem;
+	padding: .2rem .4rem;
+	display: flex;
+	text-align: center;
+}
+.other-oper-item{
+	flex: 1;
+}
+.other-oper-item.re .mint-button{
+	padding: 0 .3rem;
+}
