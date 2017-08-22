@@ -20,7 +20,7 @@ var list = Vue.component('list-view',{
 			list :null
 		}
 	},
-	template : '<div class="listView"><div v-for="item in list" class="listBox"><router-link to="/list"><div class="menu-list"><img :src="item.img"><span>{{item.label}}</span></div></router-link></div></div>',
+	template : '<div class="listView"><div v-for="item in list" class="listBox"><router-link to="/list"><div class="nav-list"><img :src="item.img"><span>{{item.label}}</span></div></router-link></div></div>',
 	created : function(){
 		var _this = this;
 		axios.get("./data/list.json")
@@ -56,7 +56,7 @@ var fj = Vue.component('fj-view',{
 			showHeader:this.isHeader
 		}
 	},
-	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="(item,index) in samll" fj-store><router-link to="/fj"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
+	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="(item,index) in samll" class="fj-store"><router-link to="/store"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
 			 +'<section class="store-detail">'
 			 +'<header class="store-title"><span class="store-name">{{item.name}}</span><span>销量:{{item.sales}}</span><div class="store-range">{{item.range}}m</div></header>'
 			 +'<div class="store-mess">{{item.detail}}</div>'
@@ -413,3 +413,49 @@ var loginTpl = {
 	 	}
 	 }
 }
+var storeMes = {
+	data (){
+		return {
+			title:"Lexus深圳湾店",
+			storeImg:'./img/swiper3.jpg',
+			seatText:"深圳市福田区莲花街道深南大道特区报社印刷大楼晶城广场一楼之112号、130号",
+			distance:400,
+			selected:"1",
+			sort:[{label:"川菜",id:"1"},{label:"粤菜",id:"2"},{label:"湘菜",id:"3"},{label:"客家菜",id:"4"},{label:"东北菜",id:"5"},{label:"赣菜",id:"6"}]
+		}
+	},
+	template :'<div class="store paddingTop40">'
+			  +'<my-header :pageTitle="title"></my-header>'
+			  +'<div class="store-content"><div class="storeImg"><img :src="storeImg"></div>'
+			  +'<div class="storeDetail"><div class="store-summary">商家简介:</div><div class="summary-mess">这个地处深圳深圳湾，人流量大</div></div>'
+			  +'<div class="store-seat"><div class="seat-text"><div class="seat-text-detail">地址:<span>{{seatText}}</span></div><div class="distance">距离您{{distance}}m</div></div>'
+			  +'<div class="seat-map"><i class="icon iconfont icon-map"></i></div>'
+			  +'<div class="seat-phone"><i class="icon iconfont icon-phone"></i></div></div>'
+			  +'<mt-navbar v-model="selected">'
+			  +'<mt-tab-item :id="item.id" v-for="(item,key) in sort">{{item.label}}</mt-tab-item>'
+			  +'</mt-navbar>'
+			  +'<menu-list></menu-list>'
+			  +'</div></div>'
+}
+var store = Vue.component('menu-list',{
+	data(){
+		return {
+			menu:[{menuImg:"./img/menu1.jpg",foodName:"香干回锅肉",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
+				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
+				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
+				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000}]
+		}
+	},
+	template:'<div class="menu">'
+			 +'<div class="menu-list" v-for="(item,key) in menu">'
+			 +'<div class="menu-img"><img :src="item.menuImg"></div>'
+			 +'<div class="menu-summary"><h2 class="menu-title">{{item.foodName}}</h2><div class="summay">{{item.foodSummary}}</div><div>{{item.price|formatPrice}}</div></div>'
+			 +'<div class="menu-oper"><i class="icon iconfont icon-add"></i></div>'
+			 +'<div class="car-bottom"><div class="icon iconfont icon-cart cart"></div></div>'
+			 +'</div></div>',
+	 filters :{
+	 	formatPrice : function(val){
+    		return '¥' + parseFloat(val).toFixed(2);
+    	}
+	 }
+})

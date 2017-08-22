@@ -8,7 +8,8 @@
 				{path:"/fj",component:fjTpl},
 				{path:"/swiper",component:swiperTpl},
 				{path:"/recommend",component:recommendTpl},
-				{path:"/login",component:loginTpl}
+				{path:"/login",component:loginTpl},
+				{path:"/store",component:storeMes}
 			]
 		});
 		new Vue({

@@ -8,6 +8,7 @@ html{
 html,body{
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
  body,html,h1,p,ul,h2,h3{
  	margin: 0;
@@ -21,6 +22,8 @@ html,body{
  }
  #app{
  	padding-bottom: .55rem;
+ 	height: 100%;
+ 	overflow: auto;
  }
  #app .mint-tabbar{
 	position: fixed;
@@ -173,7 +176,7 @@ html,body{
 	text-align: center;
 	padding-top:.1rem ;
 }
-.menu-list img{
+.nav-list img{
 	display: block;
 	width: .34rem;
 	height: .34rem;
@@ -195,7 +198,6 @@ html,body{
 	/*background: lightblue;*/
 	padding: .14rem 0 .3rem;
 	text-align: center;
-    box-sizing: border-box;
 }
 .gg .gg-item{
 	flex: 1;
@@ -662,4 +664,142 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .other-oper-item.re .mint-button{
 	padding: 0 .3rem;
+}
+
+/* 店铺信息 */
+.paddingTop40{
+	padding-top: .4rem;
+	height: 100%;
+	overflow: hidden;
+}
+.storeImg{
+	height: 1rem;
+}
+.storeImg img{
+	height: 100%;
+	width:100%;
+}
+.storeDetail{
+	height: .8rem;
+	line-height: .8rem;
+	display: flex;
+	border: 1px solid lightgray;
+}
+.store-summary{
+	width: 20%;
+	text-align: right;
+}
+.summary-mess{
+	width: 80%;
+	padding:.06rem .1rem;
+	line-height: 1;
+}
+.store-seat{
+	padding: .08rem .06rem;
+	height: 1rem;
+	display: flex;
+	box-sizing: border-box;
+	border-bottom: 1px solid lightgray;
+}
+.seat-map,.seat-phone{
+	width: .9rem;
+	height: 100%;
+	text-align: center;
+	line-height: .7rem;
+}
+.seat-map i,.seat-phone i{
+	font-size: .24rem;
+	color: lightsalmon;
+}
+.seat-phone{
+	border-left: 1px solid lightgray;
+}
+.seat-text{
+	flex: auto;
+	display: flex;
+	padding-right: .3rem;
+	flex-direction: column;
+}
+.seat-text-detail{
+	flex: 2;
+	line-height: 1.6;
+}
+.seat-text-detail span{
+	padding-left:.08rem ;
+}
+.distance{
+	flex: 1;
+}
+.store-content{
+	height: 100%;
+}
+.menu{
+	margin-top: .1rem;
+	flex: auto;
+	overflow: auto;
+	border-top: 1px solid lightgray;
+}
+.menu-list:first-child{
+	border: none;
+}
+.menu-list{
+	height: .8rem;
+	display: flex;
+	padding: .05rem .08rem;
+	border-top: 1px solid lightgray;
+}
+.menu-img{
+	width: 22%;
+}
+.menu-img img{
+	height: 100%;
+	width: 100%;
+}
+.menu-oper{
+	width: 10%;
+}
+.menu-oper i{
+	font-size: .28rem;
+	line-height: .9rem;
+	font-weight: 600;
+	color: white;
+	background-color: lightsalmon;
+	opacity: .8;
+	border-radius: 50%;
+}
+.menu-summary{
+	flex: auto;
+	padding:0 0 .05rem .1rem;
+}
+.menu-title{
+	width: 100%;
+	font-size: .14rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.summay{
+	font-size: .12rem;
+	margin: .03rem 0 0 0;
+}
+.car-bottom{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: .4;
+	height: .55rem;
+	background-color: lightgray;
+}
+.cart{
+	background-color: gray;
+	height: .5rem;
+	color: white;
+	line-height: .5rem;
+	text-align: center;
+	width: .5rem;
+	margin-left: .1rem;
+	border-radius: 50%;
+	font-size: .36rem;
+	transform: translateY(-20%);
 }
