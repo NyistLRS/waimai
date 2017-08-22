@@ -42,7 +42,7 @@ var gg = Vue.component('gg-view',{
 			img3Url :'./img/4.jpg'
 		}
 	},
-	template:'<div class="gg"><router-link to="/gg"><div class="gg-item"><div class="gg-img"><img :src="img1Url"></div><div class="gg-name">兑换商城</div></div></router-link><router-link to="/gg"><div class="gg-item"><div class="gg-img"><img :src="img2Url"></div><div class="gg-name">广告1</div></div></router-link><router-link to="/gg"><div class="gg-item"><div class="gg-img"><img :src="img3Url"></div><div class="gg-name">广告2</div></div></router-link></div>'
+	template:'<div class="gg"><div class="gg-item"><router-link to="/gg"><div class="gg-img"><img :src="img1Url"></div></router-link><div class="gg-name">兑换商城</div></div><div class="gg-item"><router-link to="/gg"><div class="gg-img"><img :src="img2Url"></div></router-link><div class="gg-name">广告1</div></div><div class="gg-item"><router-link to="/gg"><div class="gg-img"><img :src="img3Url"></div></router-link><div class="gg-name">广告2</div></div></div>'
 });
 /* 组件 ： 附近商家*/
 var fj = Vue.component('fj-view',{
