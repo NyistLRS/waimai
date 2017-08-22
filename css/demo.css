@@ -195,6 +195,7 @@ html,body{
 	/*background: lightblue;*/
 	padding: .14rem 0 .3rem;
 	text-align: center;
+    box-sizing: border-box;
 }
 .gg .gg-item{
 	flex: 1;
