@@ -702,7 +702,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	border-bottom: 1px solid lightgray;
 }
 .seat-map,.seat-phone{
-	width: .9rem;
+	width: 1.4rem;
 	height: 100%;
 	text-align: center;
 	line-height: .7rem;
@@ -717,7 +717,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .seat-text{
 	flex: auto;
 	display: flex;
-	padding-right: .3rem;
+	padding-right: .05rem;
 	flex-direction: column;
 }
 .seat-text-detail{
@@ -777,7 +777,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .menu-summary{
 	flex: auto;
-	padding:0 0 .05rem .1rem;
+	padding:0 .5rem .05rem .1rem;
 }
 .menu-title{
 	width: 100%;

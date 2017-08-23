@@ -440,24 +440,25 @@ var storeMes = {
 var store = Vue.component('menu-list',{
 	data(){
 		return {
-			menu:[{menuImg:"./img/menu1.jpg",foodName:"香干回锅肉",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
-				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
-				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
-				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000}],
+			menu:[{menuImg:"./img/menu1.jpg",foodName:"香干回锅肉",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:15,count:0},
+				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:25,count:0},
+				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:18,count:0},
+				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:36,count:0}],
 			style:{
 				height:""
 			},
 			isActive :false,
-			countSize:0
+			countSize:0,
+			selectSp:[]
 		}
 	},
 	template:'<div class="menu" :style="style">'
 			 +'<div class="menu-list" v-for="(item,key) in menu">'
 			 +'<div class="menu-img"><img :src="item.menuImg"></div>'
 			 +'<div class="menu-summary"><h2 class="menu-title">{{item.foodName}}</h2><div class="summay">{{item.foodSummary}}</div><div>{{item.price|formatPrice}}</div></div>'
-			 +'<div class="menu-oper"><i class="icon iconfont icon-subtract subtract" @click="subtract"></i>5<i class="icon iconfont icon-add" @click="add"></i></div>'
+			 +'<div class="menu-oper"><i class="icon iconfont icon-subtract subtract" @click="subtract(item)"></i>{{item.count}}<i class="icon iconfont icon-add" @click="add(item)"></i></div>'
 			 +'<div class="car-bottom"><div @click="car" class="icon iconfont icon-cart cart" :class="{active:isActive}"><i v-if="isActive">{{countSize}}</i></div>'
-			 +'<div class="select-sp" :class="{noutActive:!isActive}"><span v-if="!isActive">购物车空空如也~</span><div class="count-price" v-if="isActive">¥35.2</div><div class="sd-summary" v-if="isActive">配送费以订单为准</div></div><div class="countBtn" :class="{countBtnActive:isActive}"><span v-if="isActive">去结算</span><span v-if="!isActive" class="ps-price">¥15起送</span></div></div>'
+			 +'<div class="select-sp" :class="{noutActive:!isActive}"><span v-if="!isActive">购物车空空如也~</span><div class="count-price" v-if="isActive">{{countPrice|formatPrice}}</div><div class="sd-summary" v-if="isActive">配送费以订单为准</div></div><div class="countBtn" :class="{countBtnActive:isActive}"><span v-if="isActive">去结算</span><span v-if="!isActive" class="ps-price">¥15起送</span></div></div>'
 			 +'</div></div>',
 	 filters :{
 	 	formatPrice : function(val){
@@ -468,16 +469,22 @@ var store = Vue.component('menu-list',{
 	 	return this.style.height = document.body.clientHeight - this.$el.offsetTop - 55 + "px";  //计算menu的高度
 	 },
 	 methods:{
-	 	add : function(){
+	 	add : function(obj){
 	 		this.countSize++;
+	 		obj.count ++;
 	 	},
-	 	subtract:function(){
+	 	subtract:function(obj){
 	 		if(this.countSize > 0){
 	 			this.countSize--;
 	 		}
+	 		if(obj.count > 0){
+	 			obj.count --;
+	 		}
 	 	},
 	 	car : function(){
-	 		this.$router.push({name:"car"});
+	 		if(this.countSize > 0){
+	 			this.$router.push({name:"car"});
+	 		}
 	 	}
 	 },
 	 watch:{
@@ -487,6 +494,15 @@ var store = Vue.component('menu-list',{
 	 		}else{
 	 			this.isActive =false;
 	 		}
+	 	}
+	 },
+	 computed : {
+	 	countPrice : function(){
+	 		var count = 0;
+	 		for(var key in this.menu){
+	 			count += this.menu[key].count * this.menu[key].price;
+	 		}
+	 		return count;
 	 	}
 	 }
 	 
