@@ -426,7 +426,7 @@ var storeMes = {
 	},
 	template :'<div class="store paddingTop40">'
 			  +'<my-header :pageTitle="title"></my-header>'
-			  +'<div class="store-content"><div class="storeImg"><img :src="storeImg"></div>'
+			  +'<section class="store-content"><div class="storeImg"><img :src="storeImg"></div>'
 			  +'<div class="storeDetail"><div class="store-summary">商家简介:</div><div class="summary-mess">这个地处深圳深圳湾，人流量大</div></div>'
 			  +'<div class="store-seat"><div class="seat-text"><div class="seat-text-detail">地址:<span>{{seatText}}</span></div><div class="distance">距离您{{distance}}m</div></div>'
 			  +'<div class="seat-map"><i class="icon iconfont icon-map"></i></div>'
@@ -435,26 +435,27 @@ var storeMes = {
 			  +'<mt-tab-item :id="item.id" v-for="(item,key) in sort">{{item.label}}</mt-tab-item>'
 			  +'</mt-navbar>'
 			  +'<menu-list></menu-list>'
-			  +'</div></div>'
+			  +'</section></div>'
 }
 var store = Vue.component('menu-list',{
 	data(){
 		return {
-			menu:[{menuImg:"./img/menu1.jpg",foodName:"香干回锅肉",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:8,count:0},
-				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:25,count:0},
-				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:18,count:0},
-				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:36,count:0}],
+			menu:[{id:"1",menuImg:"./img/menu1.jpg",foodName:"香干回锅肉",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:8,count:0},
+				  {id:"2",menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:25,count:0},
+				  {id:"3",menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:18,count:0},
+				  {id:"4",menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:36,count:0}],
 			style:{
 				height:""
 			},
 			isActive :false,
 			isSub:false,
+			popupVisible:false,
 			countSize:0,
 			selectSp:[],
 			countP:0
 		}
 	},
-	template:'<div class="menu" :style="style">'
+	template:'<section class="menu" :style="style">'
 			 +'<div class="menu-list" v-for="(item,key) in menu">'
 			 +'<div class="menu-img"><img :src="item.menuImg"></div>'
 			 +'<div class="menu-summary"><h2 class="menu-title">{{item.foodName}}</h2><div class="summay">{{item.foodSummary}}</div><div>{{item.price|formatPrice}}</div></div>'
@@ -463,7 +464,15 @@ var store = Vue.component('menu-list',{
 			 +'<div class="select-sp" :class="{noutActive:!isActive}"><span v-if="!isActive">购物车空空如也~</span>'
 			 +'<div class="count-price" v-if="isActive">{{countPrice|formatPrice}}</div><div class="sd-summary" v-if="isActive">配送费以订单为准</div></div>'
 			 +'<div class="countBtn" :class="{countBtnActive:isSub}"><span v-if="isActive&&countP>=15">去结算</span><span v-if="!isActive&&countPrice==0" class="ps-price">¥15起送</span><span v-if="isActive&&!isSub" class="ps-price">还差¥{{minus}}</span></div></div>'
-			 +'</div></div>',
+			 +'<mt-popup v-model="popupVisible" position="bottom" class="sp-list">'
+			 +'<header class="gwc-header"><div class="box-free">餐盒费2元</div><div class="clear-car"><i class="icon iconfont icon-delete"></i>清空购物车</div></header>'
+			 +'<div v-for="(item,key) in selectSp" class="modal-sp-list">'
+			 +'<div class="modal-menu-summary">{{item.foodName}}'
+			 +'<div class="modal-sp-oper"><i class="icon iconfont icon-subtract subtract" @click="subtract(item)"></i>{{item.count|conetnt}}<i class="icon iconfont icon-add" @click="add(item)"></i></div>'
+			 +'<div class="modal-sp-count">{{item.count*item.price|formatPrice}}</div>'
+			 +'</div><div class=""></div></div>'
+			 +'</mt-popup>'
+			 +'</div></section>',
 	 filters :{
 	 	conetnt : function(val){
 	 		if(val == 0){
@@ -482,7 +491,12 @@ var store = Vue.component('menu-list',{
 	 methods:{
 	 	add : function(obj){
 	 		this.countSize++;
+	 		if(this.selectSp.indexOf(obj)<0){
+	 			this.selectSp.push(obj);
+	 		}
 	 		obj.count ++;
+//	 		var clone = JSON.parse(JSON.stringify(obj));
+//	 		this.selectSp.push(clone);
 	 	},
 	 	subtract:function(obj){
 	 		if(this.countSize > 0){
@@ -494,7 +508,7 @@ var store = Vue.component('menu-list',{
 	 	},
 	 	car : function(){
 	 		if(this.countSize > 0){
-	 			this.$router.push({name:"car"});
+	 			this.popupVisible = true;
 	 		}
 	 	}
 	 },
@@ -527,7 +541,7 @@ var store = Vue.component('menu-list',{
 	 		if(this.countP<15){
 	 			return 15 - this.countP;
 	 		}
-	 	}
+	 	},
 	 }
 	 
 })

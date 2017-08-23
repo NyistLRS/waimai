@@ -1,3 +1,6 @@
+*{
+	outline: none;
+}
 html{
 	font-size: 625%;
 }
@@ -761,7 +764,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	bottom: .12rem;
 	right: .03rem;
 }
-.menu-oper i{
+.menu-oper i,.modal-sp-list i{
 	font-size: .16rem;
 	font-weight: 600;
 	color: #333;
@@ -796,6 +799,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	left: 0;
 	right: 0;
 	height: .55rem;
+	z-index: 2008;
 	background-color: rgba(51,51,51,0.9);
 }
 .cart{
@@ -826,7 +830,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	background-color: red;
 	color: white;
 	border-radius: 50%;
-	transform: translateY(-30%);
+	transform: translateY(-10%);
 }
 .countBtnActive{
 	background-color:#FFD161 ;
@@ -860,4 +864,41 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .ps-price{
 	color: lightgray;
+}
+.sp-list{
+	padding-bottom: .55rem;
+	width: 100%;
+	z-index: 10!important;
+}
+.menu-list .v-modal{
+	z-index: 9!important;
+}
+.gwc-header{
+	height: .4rem;
+	line-height: .4rem;
+	color: #2f2f2f;
+	background-color: #F4F4F4;
+}
+.box-free{
+	float: left;
+	color: #999;
+}
+.clear-car{
+	float: right;
+}
+.modal-sp-list{
+	height: .6rem;
+	position: relative;
+}
+.modal-sp-oper{
+	float: right;
+}
+.modal-menu-summary{
+	float: left;
+	width: 100%;
+	height: .35rem;
+	line-height: .35rem;
+}
+.modal-sp-count{
+	float: right;
 }
