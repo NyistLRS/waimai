@@ -443,10 +443,13 @@ var store = Vue.component('menu-list',{
 			menu:[{menuImg:"./img/menu1.jpg",foodName:"香干回锅肉",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
 				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
 				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000},
-				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000}]
+				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000}],
+			style:{
+				height:""
+			}
 		}
 	},
-	template:'<div class="menu">'
+	template:'<div class="menu" :style="style">'
 			 +'<div class="menu-list" v-for="(item,key) in menu">'
 			 +'<div class="menu-img"><img :src="item.menuImg"></div>'
 			 +'<div class="menu-summary"><h2 class="menu-title">{{item.foodName}}</h2><div class="summay">{{item.foodSummary}}</div><div>{{item.price|formatPrice}}</div></div>'
@@ -457,5 +460,9 @@ var store = Vue.component('menu-list',{
 	 	formatPrice : function(val){
     		return '¥' + parseFloat(val).toFixed(2);
     	}
+	 },
+	 mounted : function(){
+	 	return this.style.height = document.body.clientHeight - this.$el.offsetTop - 55 + "px";  //计算menu的高度
 	 }
+	 
 })
