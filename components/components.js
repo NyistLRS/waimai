@@ -90,7 +90,7 @@ var child1 = Vue.component('index-view',{
 	 }
 });
 /* 组件 ：购物车页面*/
-var child2 = Vue.component('car-view',{
+var carTpl = Vue.component('car-view',{
 	data (){
 		return {
 			value:[],
@@ -446,15 +446,18 @@ var store = Vue.component('menu-list',{
 				  {menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:1000}],
 			style:{
 				height:""
-			}
+			},
+			isActive :false,
+			countSize:0
 		}
 	},
 	template:'<div class="menu" :style="style">'
 			 +'<div class="menu-list" v-for="(item,key) in menu">'
 			 +'<div class="menu-img"><img :src="item.menuImg"></div>'
 			 +'<div class="menu-summary"><h2 class="menu-title">{{item.foodName}}</h2><div class="summay">{{item.foodSummary}}</div><div>{{item.price|formatPrice}}</div></div>'
-			 +'<div class="menu-oper"><i class="icon iconfont icon-add"></i></div>'
-			 +'<div class="car-bottom"><div class="icon iconfont icon-cart cart"></div></div>'
+			 +'<div class="menu-oper"><i class="icon iconfont icon-subtract subtract" @click="subtract"></i>5<i class="icon iconfont icon-add" @click="add"></i></div>'
+			 +'<div class="car-bottom"><div @click="car" class="icon iconfont icon-cart cart" :class="{active:isActive}"><i v-if="isActive">{{countSize}}</i></div>'
+			 +'<div class="select-sp" :class="{noutActive:!isActive}"><span v-if="!isActive">购物车空空如也~</span><div class="count-price" v-if="isActive">¥35.2</div><div class="sd-summary" v-if="isActive">配送费以订单为准</div></div><div class="countBtn" :class="{countBtnActive:isActive}"><span v-if="isActive">去结算</span><span v-if="!isActive" class="ps-price">¥15起送</span></div></div>'
 			 +'</div></div>',
 	 filters :{
 	 	formatPrice : function(val){
@@ -463,6 +466,28 @@ var store = Vue.component('menu-list',{
 	 },
 	 mounted : function(){
 	 	return this.style.height = document.body.clientHeight - this.$el.offsetTop - 55 + "px";  //计算menu的高度
+	 },
+	 methods:{
+	 	add : function(){
+	 		this.countSize++;
+	 	},
+	 	subtract:function(){
+	 		if(this.countSize > 0){
+	 			this.countSize--;
+	 		}
+	 	},
+	 	car : function(){
+	 		this.$router.push({name:"car"});
+	 	}
+	 },
+	 watch:{
+	 	countSize : function(val){
+	 		if(val != 0){
+	 			this.isActive =true;
+	 		}else{
+	 			this.isActive =false;
+	 		}
+	 	}
 	 }
 	 
 })

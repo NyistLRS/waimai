@@ -9,7 +9,8 @@
 				{path:"/swiper",component:swiperTpl},
 				{path:"/recommend",component:recommendTpl},
 				{path:"/login",component:loginTpl},
-				{path:"/store",component:storeMes}
+				{path:"/store",component:storeMes},
+				{path:'/car',component:carTpl,name:"car"}
 			]
 		});
 		new Vue({
