@@ -28,7 +28,6 @@ html,body{
  	margin-right: -20px;
 	padding-right: 20px;
 	-webkit-overflow-scrolling: touch;
-	position: relative;
  }
  ::-webkit-scrollbar{ display: none }
  #app{
@@ -37,7 +36,6 @@ html,body{
  	overflow: auto;
  }
  #app .mint-tabbar{
-	position: fixed;
 	z-index: 1;
 }
 .mint-header{
