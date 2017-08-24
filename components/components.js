@@ -192,14 +192,14 @@ var temp1 ={
 			tab :null
 		}
 	},
-	template:'<div><mt-tab-container v-model="active">'
+	template:'<div class="main"><div class="content"><mt-tab-container v-model="active">'
 				+'<mt-tab-container-item id="tab-container1"><index-view></index-view>'
 				+'</mt-tab-container-item>'
 				+'<mt-tab-container-item id="tab-container2"><car-view></car-view>'
 				+'</mt-tab-container-item>'
 				+'<mt-tab-container-item id="tab-container3"><me-view></me-view>'
 				+'</mt-tab-container-item>'
-			+'</mt-tab-container>'
+			+'</mt-tab-container></div>'
 			+'<mt-tabbar v-model="selected">'
 				+'<mt-tab-item v-for="item in tab" :id="item.id">'
 					+'<img slot="icon" :src="item.imgUrl">{{item.label}}'

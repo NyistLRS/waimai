@@ -51,8 +51,15 @@ html,body{
  }
  ::-webkit-scrollbar{ display: none }
  #app{
- 	padding-bottom: .55rem;
  	height: 100%;
+ 	overflow: hidden;
+ }
+ .main{
+ 	height: 100%;
+ }
+ .content{
+ 	height: 100%;
+ 	padding-bottom: .55rem;
  	overflow: auto;
  }
  #app .mint-tabbar{
