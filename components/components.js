@@ -443,10 +443,12 @@ var store = Vue.component('menu-list',{
 			menu:[{id:"1",menuImg:"./img/menu1.jpg",foodName:"香干回锅肉",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:8,count:0},
 				  {id:"2",menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:25,count:0},
 				  {id:"3",menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:18,count:0},
+				  {id:"3",menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:18,count:0},
 				  {id:"4",menuImg:"./img/menu2.jpg",foodName:"辣子鸡丁",foodSummary:"如果你无法简洁的表达你的想法，那只能说明你还不够了解它。",price:36,count:0}],
 			style:{
 				height:""
 			},
+			cloneMenu :[],
 			isActive :false,
 			isSub:false,
 			popupVisible:false,
@@ -455,24 +457,25 @@ var store = Vue.component('menu-list',{
 			countP:0
 		}
 	},
-	template:'<section class="menu" :style="style">'
+	template:'<div><section class="menu" :style="style">'
 			 +'<div class="menu-list" v-for="(item,key) in menu">'
 			 +'<div class="menu-img"><img :src="item.menuImg"></div>'
-			 +'<div class="menu-summary"><h2 class="menu-title">{{item.foodName}}</h2><div class="summay">{{item.foodSummary}}</div><div>{{item.price|formatPrice}}</div></div>'
+			 +'<div class="menu-summary"><h2 class="menu-title">{{item.foodName}}</h2><div class="summay">{{item.foodSummary}}</div><div style="color:#fe4d3d">{{item.price|formatPrice}}</div></div>'
 			 +'<div class="menu-oper"><i class="icon iconfont icon-subtract subtract" @click="subtract(item)" v-if="item.count>0"></i>{{item.count|conetnt}}<i class="icon iconfont icon-add" @click="add(item)"></i></div>'
+			 +'</div></section>'
 			 +'<div class="car-bottom"><div @click="car" class="icon iconfont icon-cart cart" :class="{active:isActive}"><i v-if="isActive">{{countSize}}</i></div>'
 			 +'<div class="select-sp" :class="{noutActive:!isActive}"><span v-if="!isActive">购物车空空如也~</span>'
 			 +'<div class="count-price" v-if="isActive">{{countPrice|formatPrice}}</div><div class="sd-summary" v-if="isActive">配送费以订单为准</div></div>'
 			 +'<div class="countBtn" :class="{countBtnActive:isSub}"><span v-if="isActive&&countP>=15">去结算</span><span v-if="!isActive&&countPrice==0" class="ps-price">¥15起送</span><span v-if="isActive&&!isSub" class="ps-price">还差¥{{minus}}</span></div></div>'
 			 +'<mt-popup v-model="popupVisible" position="bottom" class="sp-list">'
-			 +'<header class="gwc-header"><div class="box-free">餐盒费2元</div><div class="clear-car"><i class="icon iconfont icon-delete"></i>清空购物车</div></header>'
-			 +'<div v-for="(item,key) in selectSp" class="modal-sp-list">'
+			 +'<header class="gwc-header"><div class="box-free">餐盒费2元</div><div class="clear-car" @click="clearCar"><i class="icon iconfont icon-delete"></i>清空购物车</div></header>'
+			 +'<section class="sp-list-box"><div v-for="(item,key) in selectSp" class="modal-sp-list" v-if="item.count>0">'
 			 +'<div class="modal-menu-summary">{{item.foodName}}'
 			 +'<div class="modal-sp-oper"><i class="icon iconfont icon-subtract subtract" @click="subtract(item)"></i>{{item.count|conetnt}}<i class="icon iconfont icon-add" @click="add(item)"></i></div>'
 			 +'<div class="modal-sp-count">{{item.count*item.price|formatPrice}}</div>'
-			 +'</div><div class=""></div></div>'
-			 +'</mt-popup>'
-			 +'</div></section>',
+			 +'</div><div class="modal-sp-mes">含{{item.count}}份原价商品</div></div>'
+			 +'</section></mt-popup>'
+			 +'</div>',
 	 filters :{
 	 	conetnt : function(val){
 	 		if(val == 0){
@@ -486,6 +489,7 @@ var store = Vue.component('menu-list',{
     	}
 	 },
 	 mounted : function(){
+	 	this.cloneMenu = JSON.parse(JSON.stringify(this.menu));
 	 	return this.style.height = document.body.clientHeight - this.$el.offsetTop - 55 + "px";  //计算menu的高度
 	 },
 	 methods:{
@@ -505,11 +509,20 @@ var store = Vue.component('menu-list',{
 	 		if(obj.count > 0){
 	 			obj.count --;
 	 		}
+	 		if(this.countSize<=0){
+	 			this.popupVisible =false;
+	 		}
 	 	},
 	 	car : function(){
 	 		if(this.countSize > 0){
 	 			this.popupVisible = true;
 	 		}
+	 	},
+	 	clearCar:function(){
+	 		this.selectSp = [];
+	 		this.countSize =0;
+	 		this.popupVisible =false;
+	 		this.menu = JSON.parse(JSON.stringify(this.cloneMenu));
 	 	}
 	 },
 	 watch:{

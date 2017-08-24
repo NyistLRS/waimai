@@ -1,11 +1,13 @@
 *{
 	outline: none;
+	-webkit-overflow-scrolling: touch;
 }
 html{
 	font-size: 625%;
 }
  body {
  	font-size: .14rem;
+ 	color: #333;
  	font-family: normal normal normal normal 16px / normal Arial, Helvetica, sans-serif;
  	}
 html,body{
@@ -22,6 +24,10 @@ html,body{
  }
  div,section,article,header,footer{
  	box-sizing: border-box;
+ }
+ .cancel-scroll-bar{
+ 	margin-right: -20px;
+	padding-right: 20px;
  }
  #app{
  	padding-bottom: .55rem;
@@ -739,6 +745,8 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .menu{
 	margin-top: .1rem;
 	flex: auto;
+	margin-right: -20px;
+	padding-right: 20px;
 	overflow: auto;
 	border-top: 1px solid lightgray;
 }
@@ -762,7 +770,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .menu-oper{
 	position: absolute;
 	bottom: .12rem;
-	right: .03rem;
+	right: .07rem;
 }
 .menu-oper i,.modal-sp-list i{
 	font-size: .16rem;
@@ -774,6 +782,9 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	opacity: .8;
 	border-radius: 50%;
 }
+.menu-oper i:last-child,.modal-sp-list i:last-child{
+	margin-right: 0;
+}
 .subtract{
 	background-color: white!important;
 	border: .01rem solid lightgray;
@@ -783,6 +794,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	padding:0 .5rem .05rem .1rem;
 }
 .menu-title{
+	color: #2f2f2f;
 	width: 100%;
 	font-size: .14rem;
 	white-space: nowrap;
@@ -790,6 +802,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	text-overflow: ellipsis;
 }
 .summay{
+	color: #a9a9a9;
 	font-size: .12rem;
 	margin: .03rem 0 0 0;
 }
@@ -865,12 +878,20 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .ps-price{
 	color: lightgray;
 }
+.sp-list-box{
+	max-height: 2.4rem;
+	overflow: auto;
+	width: 100%;
+}
 .sp-list{
-	padding-bottom: .55rem;
+	bottom: .55rem;
 	width: 100%;
 	z-index: 10!important;
 }
-.menu-list .v-modal{
+.sp-list header,.sp-list section{
+	padding: 0 .1rem;
+}
+.store .v-modal{
 	z-index: 9!important;
 }
 .gwc-header{
@@ -895,10 +916,16 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .modal-menu-summary{
 	float: left;
+	color: #444;
 	width: 100%;
 	height: .35rem;
 	line-height: .35rem;
 }
 .modal-sp-count{
 	float: right;
+	margin-right: .1rem;
+}
+.modal-sp-mes{
+	color: #999;
+	font-size: .12rem;
 }
