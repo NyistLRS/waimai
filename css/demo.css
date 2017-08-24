@@ -335,7 +335,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	color: red;
 }
 .seat-view{
-	padding: .8rem 0 .4rem 0;
+	padding-top: .8rem;
 	height: 100%;
 }
 .position{
@@ -354,13 +354,18 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .seat-view .mint-indexlist{
 	height: 100%;
-	overflow: auto;
+	overflow: hidden;
 }
+
 .mint-indexlist-content{
+	height: 100%;
+	overflow: auto;
+	margin-right: 10px;
 	min-height:100%!important;
+	-webkit-overflow-scrolling: touch;
 }
 .mint-indexlist-nav{
-	position: fixed;
+	/*position: fixed;*/
 }
 .position span{
 	color: lightpink;

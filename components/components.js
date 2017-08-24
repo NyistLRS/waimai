@@ -259,7 +259,7 @@ var city = Vue.component('city-list',{
 			city :null
 		}
 	},
-	template :'<mt-index-list @touchmove.stop class="cancel-scroll-bar">'
+	template :'<mt-index-list @touchmove.stop>'
 				  +'<mt-index-section v-for="(item,value) in city" :index="value">'
 				    +'<mt-cell v-for="cityChild in item" :title="cityChild.cityName"></mt-cell>'
 				  +'</mt-index-section>'
