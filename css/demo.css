@@ -27,7 +27,7 @@ html,body{
  .cancel-scroll-bar{
  	margin-right: -20px;
 	padding-right: 20px;
-	-webkit-overflow-scrolling: touch;
+	/*-webkit-overflow-scrolling: touch;*/
  }
  ::-webkit-scrollbar{ display: none }
  #app{
@@ -36,6 +36,7 @@ html,body{
  	overflow: auto;
  }
  #app .mint-tabbar{
+	position: fixed;
 	z-index: 1;
 }
 .mint-header{
