@@ -70,7 +70,8 @@ html,body{
 	color: #333;
 }
 .padding40{
-	padding:.4rem 0 .55rem 0;
+	padding:.4rem 0 .95rem 0;
+	height: 100%;
 }
 .mint-header-button{
 	font-size: .16rem;
@@ -360,7 +361,6 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .mint-indexlist-content{
 	height: 100%;
 	overflow: auto;
-	margin-right: 10px;
 	min-height:100%!important;
 	-webkit-overflow-scrolling: touch;
 }
@@ -530,6 +530,10 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .hyzx .mint-cell:last-child,
 .seat-view .mint-cell:last-child{
 	background-image: none;
+}
+.sp-conetnt{
+	height: 100%;
+	overflow: auto;
 }
 .sp-count{
 	position: fixed;
