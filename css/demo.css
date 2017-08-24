@@ -337,7 +337,6 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .seat-view{
 	padding-top: .8rem;
 	height: 100%;
-    overflow: auto;
 }
 .position{
 	position: fixed;
@@ -352,6 +351,10 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	width: 100%;
 	z-index: 1;
 	background-color: white;
+}
+.seat-view .mint-indexlist{
+	height: 100%;
+	overflow: auto;
 }
 .mint-indexlist-content{
 	min-height:100%!important;
