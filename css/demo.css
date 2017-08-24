@@ -497,6 +497,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .sd-checkbox{
 	width: 10%;
+	border-top:1px solid transparent;
 }
 .sd-name{
 	flex: auto;
@@ -512,7 +513,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	border-bottom: .01rem solid lightgray;
 	margin-bottom: .2rem;
 }
-.mint-cell-wrapper{
+.sp-conetnt .mint-cell-wrapper{
 	background-image: none;
 }
 .mint-cell{
@@ -544,7 +545,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	right: 0;
 	z-index: 1;
 	background-color: white;
-	border-top: .01rem solid lightblue;
+	border-top: .01rem solid lightgray;
 }
 .sp-count .sd-name{
 	padding: 0 .1rem;

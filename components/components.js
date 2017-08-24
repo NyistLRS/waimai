@@ -109,10 +109,10 @@ var carTpl = Vue.component('car-view',{
 			   +'<section class="sp-conetnt cancel-scroll-bar" @touchmove.stop><div v-for="(item,key) in list">'
 			   +'<div class="sd-sp-list sd">'
 			   +'<mt-checklist class="sd-checkbox " v-model="value" :options="[\'\']"></mt-checklist><div class="sd-name">{{item.name}}</div></div>'
-			   +'<div class="sd-sp-list sp-detail" v-for="(item1,key1) in item.sp"><mt-checklist class="sd-checkbox " v-model="value" :options="[item1.spName]"></mt-checklist>'
+			   +'<div class="sd-sp-list sp-detail" v-for="(item1,key1) in item.sp"><mt-checklist class="sd-checkbox " v-model="value" :options="[item1.spName]" @click.native.prevent="getPrice(item1.spName)"></mt-checklist>'
 			   +'<div class="sd-name"><div class="sp-detail-img"><img :src="item1.img"></div><div class="sp-mes">{{item1.spName}}</div><div class="sp-size"><div class="red-font">{{item1.price |formatPrice}}</div><div>{{item1.num}}</div></div></div></div>'
 			   +'</div></section>'
-			   +'<section class="sp-count"><div class="sd-sp-list"><mt-checklist class="sd-checkbox " v-model="value" :options="[\'all\']"></mt-checklist>'
+			   +'<section class="sp-count"><div class="sd-sp-list"><mt-checklist class="sd-checkbox " v-model="value" :options="[\'all\']" @click.native.prevent="getPrice(\'all\')"></mt-checklist>'
 			   +'<div class="sd-name"><span>全选</span>'
 			   +'<div class="count-mes"><div></div><div class="price-count">合计：<span class="priceCountNum">{{price|formatPrice}}</span></div><div class="oper-count"><mt-button type="danger"  size="small">结算({{size}})</mt-button></div></div></div></div></section></div>'
 			   +'</div>',
@@ -122,8 +122,13 @@ var carTpl = Vue.component('car-view',{
     	}
     },
     methods:{
-    	getPrice : function(){
-    		
+    	getPrice : function(val){
+    		debugger;
+    		if(this.value.indexOf(val) < 0){
+    			this.value.push(val);
+    		}else{
+    			this.value = this.value.join(',').replace(val,' ').trim().split(',');
+    		}
     	}
     },
     watch :{
