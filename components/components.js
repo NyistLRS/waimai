@@ -294,7 +294,7 @@ var temp2 = {
 			position:"深圳市-广东省"
 		}
 	},
-	template :'<div class="seat-view">'
+	template :'<div class="seat-view" @touchmove.stop>'
 			  +'<my-header :pageTitle="title"></my-header>'
 			  +'<div class="position">猜您的位置是:<span>{{position}}</span></div>'
 			  +'<city-list></city-list>'
