@@ -192,7 +192,7 @@ var temp1 ={
 			tab :null
 		}
 	},
-	template:'<div class="main"><div class="content"><mt-tab-container v-model="active" class="cancel-scroll-bar" @touchmove.stop>'
+	template:'<div class="main"><div class="content" class="cancel-scroll-bar" @touchmove.stop><mt-tab-container v-model="active">'
 				+'<mt-tab-container-item id="tab-container1"><index-view></index-view>'
 				+'</mt-tab-container-item>'
 				+'<mt-tab-container-item id="tab-container2"><car-view></car-view>'
