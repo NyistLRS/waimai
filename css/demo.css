@@ -96,7 +96,7 @@ html,body{
 	border-left: none;
 }
 .index{
-	padding-top: .8rem;
+	padding: .8rem 0 .55rem 0;
 	height: 100%;
 }
 .sroll-index{
