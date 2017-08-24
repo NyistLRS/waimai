@@ -1,6 +1,5 @@
 *{
 	outline: none;
-	-webkit-overflow-scrolling: touch;     /* 这个对滚动有影响*/
 }
 html{
 	font-size: 625%;
@@ -28,6 +27,7 @@ html,body{
  .cancel-scroll-bar{
  	margin-right: -20px;
 	padding-right: 20px;
+	-webkit-overflow-scrolling: touch;
  }
  ::-webkit-scrollbar{ display: none }
  #app{
