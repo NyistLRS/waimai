@@ -609,8 +609,8 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	padding: .05rem;
 }
 .login-mes{
-	height: .8rem;
-	line-height: .8rem;
+	height: .6rem;
+	line-height: .6rem;
 	display: flex;
 }
 .login-mes .login-label{
