@@ -69,13 +69,25 @@ var child1 = Vue.component('index-view',{
 			imgUrl :'./img/1.jpg'
 		}
 	},
-	template:'<div class="index">'
-			 +'<swiper-view></swiper-view>'
+	template:'<div class="index"><mt-header fixed title="首页"></mt-header>'
+			 +'<section class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess" @click="tongzhi()">公告</div></section>'
+			 +'<section class="sroll-index cancel-scroll-bar"><swiper-view></swiper-view>'
 			 +'<list-view></list-view>'
 			 +'<div class="banner"><img :src="imgUrl" alt="图片"></div>'
 			 +'<gg-view></gg-view>'
 			 +'<fj-view :isHeader="true"></fj-view>'
-			 +'</div>'
+			 +'</section></div>',
+	 methods : {
+	 	selectSeat : function(){
+	 		this.$router.push({name:"seat"});
+	 	},
+	 	dojump : function(){
+	 		this.$router.push({name:"search"});
+	 	},
+	 	tongzhi : function(){
+	 		
+	 	}
+	 }
 });
 /* 组件 ：购物车页面*/
 var carTpl = Vue.component('car-view',{
@@ -93,7 +105,7 @@ var carTpl = Vue.component('car-view',{
            checkName :[]
 		}
 	},
-	template : '<section class="padding40">'
+	template : '<section class="padding40"><mt-header fixed title="购物车"><mt-button slot="right">编辑</mt-button></mt-header>'
 			   +'<div v-for="(item,key) in list">'
 			   +'<div class="sd-sp-list sd">'
 			   +'<mt-checklist class="sd-checkbox " v-model="value" :options="[\'\']"></mt-checklist><div class="sd-name">{{item.name}}</div></div>'
@@ -149,7 +161,7 @@ var child3 = Vue.component('me-view',{
 			customImg:"./img/custom.jpg"
 		}
 	},
-	template : '<div class="hyzx">'
+	template : '<div class="hyzx"><mt-header fixed title="会员中心"></mt-header>'
 				+'<div class="grmes"><div class="custom-img"><img :src="customImg"></div><div class="custom-mes"><span class="custom-name">罗荣盛</span><i class="icon iconfont icon-more"></i></div></div>'
 				+'<div class="f-mes">'
 				+'<div class="f-item"><ul><li><i class="icon iconfont icon-favoritesfilling"></i></li><li>福心</li><li>2</li></ul></div>'
@@ -177,13 +189,10 @@ var temp1 ={
 		return {
 			selected:"index",
 			active:"tab-container1",
-			tab :null,
-			title:"首页"
+			tab :null
 		}
 	},
-	template:'<div class="main"><mt-header fixed :title="title"><mt-button v-if="selected==\'car\'" slot="right">编辑</mt-button></mt-header>'
-				+'<section v-if="selected==\'index\'" class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess" @click="tongzhi()">公告</div></section>'
-			    +'<div class="content cancel-scroll-bar" @touchmove.stop><mt-tab-container v-model="active">'
+	template:'<div class="main"><div class="content"><mt-tab-container v-model="active">'
 				+'<mt-tab-container-item id="tab-container1"><index-view></index-view>'
 				+'</mt-tab-container-item>'
 				+'<mt-tab-container-item id="tab-container2"><car-view></car-view>'
@@ -209,15 +218,12 @@ var temp1 ={
 		selected : function(val){
 			console.log(val);
 			if(val == 'index'){
-				this.title = "首页";
 				return this.active = 'tab-container1';
 			}
 			if(val == 'car'){
-				this.title = "购物车";
 				return this.active = 'tab-container2';
 			}
 			if(val == 'me'){
-				this.title = "会员中心";
 				return this.active = 'tab-container3';
 			}
 		}
@@ -231,19 +237,7 @@ var temp1 ={
 		.catch(function(response){
 			
 		});
-	},
-	 methods : {
-	 	selectSeat : function(){
-	 		this.$router.push({name:"seat"});
-	 	},
-	 	dojump : function(){
-	 		this.$router.push({name:"search"});
-	 	},
-	 	tongzhi : function(){
-	 		
-	 	}
-	 }
-	
+	}
 }
 /* 通用组件：头部*/
 var header = Vue.component('my-header',{
