@@ -379,7 +379,7 @@ var loginTpl = {
 	template :'<section class="login-view">'
 			 +'<my-header :pageTitle="pagetitle"></my-header>'
 			 +'<div class="login-banner"><img :src="bannerImg"></div>'
-			 +'<form><div class="login-mes"><div class="login-label">登录类型</div><div class="login-input"><input type="text" v-model="loginType" placeholder="会员" @click.prevent="changeType(loginType)"/></div></div>'
+			 +'<form><div class="login-mes"><div class="login-label">登录类型</div><div class="login-input"><input type="text" v-model="loginType" placeholder="会员" @click.prevent.stop="changeType(loginType)"/></div></div>'
 			 +'<div class="login-mes"><div class="login-label">手机号码</div><div class="login-input"><input type="text"/></div></div>'
 			 +'<div class="login-mes"><div class="login-label">密码</div><div class="login-input"><input type="password"/></div></div>'
 			 +'<mt-popup v-if="popupVisible" v-model="popupVisible" position="bottom" class="mint-popup-4">'
