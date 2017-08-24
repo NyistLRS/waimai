@@ -335,7 +335,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	color: red;
 }
 .seat-view{
-	padding-top: .8rem 0 .4rem 0;
+	padding: .8rem 0 .4rem 0;
 	height: 100%;
 }
 .position{
