@@ -259,7 +259,7 @@ var city = Vue.component('city-list',{
 			city :null
 		}
 	},
-	template :'<mt-index-list>'
+	template :'<mt-index-list @touchmove.stop class="cancel-scroll-bar">'
 				  +'<mt-index-section v-for="(item,value) in city" :index="value">'
 				    +'<mt-cell v-for="cityChild in item" :title="cityChild.cityName"></mt-cell>'
 				  +'</mt-index-section>'
@@ -294,7 +294,7 @@ var temp2 = {
 			position:"深圳市-广东省"
 		}
 	},
-	template :'<div class="seat-view" @touchmove.stop>'
+	template :'<div class="seat-view">'
 			  +'<my-header :pageTitle="title"></my-header>'
 			  +'<div class="position">猜您的位置是:<span>{{position}}</span></div>'
 			  +'<city-list></city-list>'
