@@ -71,7 +71,7 @@ var child1 = Vue.component('index-view',{
 	},
 	template:'<div class="index"><mt-header fixed title="首页"></mt-header>'
 			 +'<section class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess" @click="tongzhi()">公告</div></section>'
-			 +'<section class="sroll-index cancel-scroll-bar"><swiper-view></swiper-view>'
+			 +'<section class="sroll-index cancel-scroll-bar" @touchmove.prevent><swiper-view></swiper-view>'
 			 +'<list-view></list-view>'
 			 +'<div class="banner"><img :src="imgUrl" alt="图片"></div>'
 			 +'<gg-view></gg-view>'
