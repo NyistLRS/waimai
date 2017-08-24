@@ -335,7 +335,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 	color: red;
 }
 .seat-view{
-	padding-top: .8rem;
+	padding-top: .8rem 0 .4rem 0;
 	height: 100%;
 }
 .position{
@@ -518,7 +518,12 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 .sd-sp-list .mint-cell{
 	border: none;
 }
-.sp-detail .mint-cell-wrapper,.sd-sp-list .mint-cell-wrapper,.sp-detail .mint-cell:last-child,.sd-sp-list .mint-cell:last-child,.hyzx .mint-cell:last-child{
+.sp-detail .mint-cell-wrapper,
+.sd-sp-list .mint-cell-wrapper,
+.sp-detail .mint-cell:last-child,
+.sd-sp-list .mint-cell:last-child,
+.hyzx .mint-cell:last-child,
+.seat-view .mint-cell:last-child{
 	background-image: none;
 }
 .sp-count{
