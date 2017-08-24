@@ -70,24 +70,12 @@ var child1 = Vue.component('index-view',{
 		}
 	},
 	template:'<div class="index">'
-			 +'<section class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess" @click="tongzhi()">公告</div></section>'
 			 +'<swiper-view></swiper-view>'
 			 +'<list-view></list-view>'
 			 +'<div class="banner"><img :src="imgUrl" alt="图片"></div>'
 			 +'<gg-view></gg-view>'
 			 +'<fj-view :isHeader="true"></fj-view>'
-			 +'</div>',
-	 methods : {
-	 	selectSeat : function(){
-	 		this.$router.push({name:"seat"});
-	 	},
-	 	dojump : function(){
-	 		this.$router.push({name:"search"});
-	 	},
-	 	tongzhi : function(){
-	 		
-	 	}
-	 }
+			 +'</div>'
 });
 /* 组件 ：购物车页面*/
 var carTpl = Vue.component('car-view',{
@@ -192,7 +180,9 @@ var temp1 ={
 			tab :null
 		}
 	},
-	template:'<div class="main"><mt-header fixed title="首页"></mt-header><div class="content cancel-scroll-bar" @touchmove.stop><mt-tab-container v-model="active">'
+	template:'<div class="main"><mt-header fixed title="首页"></mt-header>'
+				+'<section class="toolbar"><div class="seat" @click="selectSeat()">深圳<i></i></div><div class="top-search"><div class="search-box"><i class="icon iconfont icon-search"></i><input type="text" placeholder="搜索" @click="dojump()"></div></div><div class="mess" @click="tongzhi()">公告</div></section>'
+			    +'<div class="content cancel-scroll-bar" @touchmove.stop><mt-tab-container v-model="active">'
 				+'<mt-tab-container-item id="tab-container1"><index-view></index-view>'
 				+'</mt-tab-container-item>'
 				+'<mt-tab-container-item id="tab-container2"><car-view></car-view>'
@@ -237,7 +227,19 @@ var temp1 ={
 		.catch(function(response){
 			
 		});
-	}
+	},
+	 methods : {
+	 	selectSeat : function(){
+	 		this.$router.push({name:"seat"});
+	 	},
+	 	dojump : function(){
+	 		this.$router.push({name:"search"});
+	 	},
+	 	tongzhi : function(){
+	 		
+	 	}
+	 }
+	
 }
 /* 通用组件：头部*/
 var header = Vue.component('my-header',{

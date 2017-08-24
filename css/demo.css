@@ -332,6 +332,8 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .seat-view{
 	padding-top: .8rem;
+	height: 100%;
+    overflow: auto;
 }
 .position{
 	position: fixed;
