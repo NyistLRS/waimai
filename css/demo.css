@@ -102,7 +102,6 @@ html,body{
 .sroll-index{
 	height: 100%;
 	overflow: auto;
-	padding-bottom: .55rem;
 }
 .index .mint-header{
 	font-family: "微软雅黑";
