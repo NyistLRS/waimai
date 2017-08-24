@@ -261,6 +261,9 @@ html,body{
 .fj{
 	margin-bottom: .3rem;
 }
+.fj-store{
+	position: relative;
+}
 .fj-store-item{
 	display: flex;
 	height: 1.1rem;
