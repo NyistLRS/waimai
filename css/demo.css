@@ -27,7 +27,7 @@ html,body{
  .cancel-scroll-bar{
  	margin-right: -20px;
 	padding-right: 20px;
-	/*-webkit-overflow-scrolling: touch;*/
+	-webkit-overflow-scrolling: touch;
  }
  ::-webkit-scrollbar{ display: none }
  #app{
