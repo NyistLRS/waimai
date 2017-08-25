@@ -518,7 +518,7 @@ a,a:hover,a:active,a:visited,a:link,a:focus{
 }
 .mint-cell{
 	margin-top: -.01rem;
-	border-top: .01rem solid lightgray;
+	/*border-top: .01rem solid lightgray;*/
 	border-bottom: .01rem solid lightgray;
 }
 .sd-sp-list .mint-cell{

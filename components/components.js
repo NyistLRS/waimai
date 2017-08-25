@@ -56,7 +56,7 @@ var fj = Vue.component('fj-view',{
 			showHeader:this.isHeader
 		}
 	},
-	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="(item,index) in samll" class="fj-store"><router-link to="/store"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
+	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="(item,index) in samll" class="fj-store"><router-link to="/store/1"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
 			 +'<section class="store-detail">'
 			 +'<header class="store-title"><span class="store-name">{{item.name}}</span><span>销量:{{item.sales}}</span><div class="store-range">{{item.range}}m</div></header>'
 			 +'<div class="store-mess">{{item.detail}}</div>'
@@ -108,7 +108,7 @@ var carTpl = Vue.component('car-view',{
 	template : '<div class="padding40"><mt-header fixed title="购物车"><mt-button slot="right">编辑</mt-button></mt-header>'
 			   +'<section class="sp-conetnt cancel-scroll-bar" @touchmove.stop><div v-for="(item,key) in list">'
 			   +'<div class="sd-sp-list sd">'
-			   +'<mt-checklist class="sd-checkbox " v-model="value" :options="[\'\']"></mt-checklist><div class="sd-name">{{item.name}}</div></div>'
+			   +'<mt-checklist class="sd-checkbox " v-model="value" :options="[item]" @click.native.prevent="getPrice(item)"></mt-checklist><div class="sd-name">{{item.name}}</div></div>'
 			   +'<div class="sd-sp-list sp-detail" v-for="(item1,key1) in item.sp"><mt-checklist class="sd-checkbox " v-model="value" :options="[item1.spName]" @click.native.prevent="getPrice(item1.spName)"></mt-checklist>'
 			   +'<div class="sd-name"><div class="sp-detail-img"><img :src="item1.img"></div><div class="sp-mes">{{item1.spName}}</div><div class="sp-size"><div class="red-font">{{item1.price |formatPrice}}</div><div>{{item1.num}}</div></div></div></div>'
 			   +'</div></section>'
@@ -123,12 +123,52 @@ var carTpl = Vue.component('car-view',{
     },
     methods:{
     	getPrice : function(val){
-    		debugger;
+    		this.price = 0;
+    		var popName = '';
     		if(this.value.indexOf(val) < 0){
     			this.value.push(val);
+    			if(typeof val == "object" ){  // 把列表下的加进数组
+	    			for(var key in val){
+	    				if(key == "sp"){
+	    					for(var i in val.sp){
+	    						if(this.value.indexOf(val.sp[i].spName) < 0){
+	    							this.value.push(val.sp[i].spName);
+	    						}
+							}
+	    				}
+	    			}
+    			}
     		}else{
-    			this.value = this.value.join(',').replace(val,' ').trim().split(',');
+    			this.value.splice(this.value.indexOf(val),1);
+    			if(typeof val == "object" ){  // 把列表下的加进数组
+	    			for(var key in val){
+	    				if(key == "sp"){
+	    					for(var i in val.sp){
+	    						this.value.splice(this.value.indexOf(val.sp[i].spName),1);
+							}
+	    				}
+	    			}
+    			}else{   // 不是对象，就 是选择按钮
+    				for(var item in this.value){
+    					if(typeof this.value[item] == "object"){
+    						for(var i in this.value[item].sp){
+    							if(this.value.indexOf(this.value[item].sp[i].spName) > 0){
+    								popName = this.value[item];
+    								break;
+    							}
+							}
+    						this.value.splice(popName,1);
+    					}
+    				}
+    			}
     		}
+    		for(var key2 in this.list){
+				for(var i in this.list[key2].sp){
+					if(this.value.indexOf(this.list[key2].sp[i].spName) >= 0){
+						this.price += parseFloat(this.list[key2].sp[i].price)*parseFloat(this.list[key2].sp[i].num);
+					}
+				}
+			}
     	}
     },
     watch :{
@@ -198,43 +238,19 @@ var temp1 ={
 			tab :null
 		}
 	},
-	template:'<div class="main"><div class="content"><mt-tab-container v-model="active">'
-				+'<mt-tab-container-item id="tab-container1"><index-view></index-view>'
-				+'</mt-tab-container-item>'
-				+'<mt-tab-container-item id="tab-container2"><car-view></car-view>'
-				+'</mt-tab-container-item>'
-				+'<mt-tab-container-item id="tab-container3"><me-view></me-view>'
-				+'</mt-tab-container-item>'
-			+'</mt-tab-container></div>'
+	template:'<div class="main"><div class="content"><router-view></router-view></div>'
 			+'<mt-tabbar v-model="selected">'
-				+'<mt-tab-item v-for="item in tab" :id="item.id">'
+				+'<mt-tab-item v-for="item in tab" @click.native="indexSwap(item.id)" :id="item.id">'
 					+'<img slot="icon" :src="item.imgUrl">{{item.label}}'
 				+'</mt-tab-item>'
-				/*+'<mt-tab-item id="index">'
-					+'<img slot="icon"> 首页'
-				+'</mt-tab-item>'
-				+'<mt-tab-item id="car">'
-					+'<img slot="icon" > 购物车'
-				+'</mt-tab-item>'
-				+'<mt-tab-item id="me">'
-					+'<img slot="icon" > 我的'
-				+'</mt-tab-item>'*/
 			+'</mt-tabbar></div>',
-	watch:{
-		selected : function(val){
-			console.log(val);
-			if(val == 'index'){
-				return this.active = 'tab-container1';
-			}
-			if(val == 'car'){
-				return this.active = 'tab-container2';
-			}
-			if(val == 'me'){
-				return this.active = 'tab-container3';
-			}
+	methods:{
+		indexSwap : function(val){
+			this.$router.push({name:val});
 		}
 	},
 	created : function(){
+		this.selected = this.$route.name;
 		var _this =this;
 		axios.get('./data/tab.json')
 		.then(function(response){
@@ -247,13 +263,14 @@ var temp1 ={
 }
 /* 通用组件：头部*/
 var header = Vue.component('my-header',{
-	props:['pageTitle'],
+	props:['pageTitle','routerName'],
 	data() {
 		return {
+			name:"/"+(this.routerName==undefined?"":this.routerName)
 		}
 	},
 	template:'<mt-header fixed :title="pageTitle">'
-				+'<router-link to="/" slot="left">'
+				+'<router-link :to="name" slot="left">'
 			    	+'<mt-button icon="back">返回</mt-button>'
 			  	+'</router-link>'
 			  +'</mt-header>'
@@ -306,7 +323,6 @@ var temp2 = {
 			  +'<city-list></city-list>'
 			  +'</div>',
 	created : function(){
-		
 	}
 }
 /* 搜索页面 */
@@ -355,11 +371,12 @@ var swiperTpl = {
 var recommendTpl = {
 	data (){
 		return{
-			title:"我的推荐"
+			title:"我的推荐",
+			routerName:"custom"
 		}
 	},
 	template :'<section class="recommend">'
-			  +'<my-header :pageTitle="title"></my-header>'
+			  +'<my-header :pageTitle="title" :routerName="routerName"></my-header>'
 			  +'<section class="self-mes">'
 			  +'<div class="self-mes-item"><div>我的邀请码</div><div>12345z<i class="icon iconfont icon-more"></i></div></div>'
 			  +'<div class="self-mes-item"><div>我的推荐</div><div>100</div></div>'
@@ -427,21 +444,27 @@ var storeMes = {
 			seatText:"深圳市福田区莲花街道深南大道特区报社印刷大楼晶城广场一楼之112号、130号",
 			distance:400,
 			selected:"1",
+			prevRouter:"list",
 			sort:[{label:"川菜",id:"1"},{label:"粤菜",id:"2"},{label:"湘菜",id:"3"},{label:"客家菜",id:"4"},{label:"东北菜",id:"5"},{label:"赣菜",id:"6"}]
 		}
 	},
 	template :'<div class="store paddingTop40">'
-			  +'<my-header :pageTitle="title"></my-header>'
+			  +'<my-header :pageTitle="title" :routerName="prevRouter"></my-header>'
 			  +'<section class="store-content"><div class="storeImg"><img :src="storeImg"></div>'
 			  +'<div class="storeDetail"><div class="store-summary">商家简介:</div><div class="summary-mess">这个地处深圳深圳湾，人流量大</div></div>'
 			  +'<div class="store-seat"><div class="seat-text"><div class="seat-text-detail">地址:<span>{{seatText}}</span></div><div class="distance">距离您{{distance}}m</div></div>'
 			  +'<div class="seat-map"><i class="icon iconfont icon-map"></i></div>'
 			  +'<div class="seat-phone"><i class="icon iconfont icon-phone"></i></div></div>'
 			  +'<mt-navbar v-model="selected">'
-			  +'<mt-tab-item :id="item.id" v-for="(item,key) in sort">{{item.label}}</mt-tab-item>'
+			  +'<mt-tab-item :id="item.id" v-for="(item,key) in sort" @click.native="swapRoute(item.label)">{{item.label}}</mt-tab-item>'
 			  +'</mt-navbar>'
-			  +'<menu-list></menu-list>'
-			  +'</section></div>'
+			  +'<router-view></router-view>'
+			  +'</section></div>',
+	methods:{
+		swapRoute : function(val){
+			this.$router.push({name:val});
+		}
+	}
 }
 var store = Vue.component('menu-list',{
 	data(){
@@ -564,3 +587,19 @@ var store = Vue.component('menu-list',{
 	 }
 	 
 })
+/* 分类路由 */
+var children2 = {
+	template :'<div>粤菜</div>'
+}
+var children3 = {
+	template :'<div>湘菜</div>'
+}
+var children4 = {
+	template :'<div>客家菜</div>'
+}
+var children5 = {
+	template :'<div>东北菜</div>'
+}
+var children6 = {
+	template :'<div>赣菜</div>'
+}
