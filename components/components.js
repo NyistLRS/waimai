@@ -34,7 +34,7 @@ var list = Vue.component('list-view',{
 	}
 });
 /* 组件: 广告*/
-var gg = Vue.component('gg-view',{
+var guanggao = Vue.component('guanggao-view',{
 	data(){
 		return {
 			img1Url :'./img/2.jpg',
@@ -42,10 +42,10 @@ var gg = Vue.component('gg-view',{
 			img3Url :'./img/4.jpg'
 		}
 	},
-	template:'<div class="gg"><div class="gg-item"><router-link to="/gg"><div class="gg-img"><img :src="img1Url"></div></router-link><div class="gg-name">兑换商城</div></div><div class="gg-item"><router-link to="/gg"><div class="gg-img"><img :src="img2Url"></div></router-link><div class="gg-name">广告1</div></div><div class="gg-item"><router-link to="/gg"><div class="gg-img"><img :src="img3Url"></div></router-link><div class="gg-name">广告2</div></div></div>'
+	template:'<div class="gg"><div class="gg-item"><router-link to="/guanggao"><div class="gg-img"><img :src="img1Url"></div></router-link><div class="gg-name">兑换商城</div></div><div class="gg-item"><router-link to="/guanggao"><div class="gg-img"><img :src="img2Url"></div></router-link><div class="gg-name">广告1</div></div><div class="gg-item"><router-link to="/guanggao"><div class="gg-img"><img :src="img3Url"></div></router-link><div class="gg-name">广告2</div></div></div>'
 });
 /* 组件 ： 附近商家*/
-var fj = Vue.component('fj-view',{
+var fjsj = Vue.component('fjsj-view',{
 	props :['isHeader'],
 	data(){
 		return {
@@ -56,14 +56,19 @@ var fj = Vue.component('fj-view',{
 			showHeader:this.isHeader
 		}
 	},
-	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="(item,index) in samll" class="fj-store"><router-link to="/store/1"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
+	template:'<div class="fj"><mt-header title="附近的商家" v-if="showHeader"></mt-header><div v-for="(item,index) in samll" class="fj-store"><router-link :to="{name:\'1\',query: {name: routeUrl}}"><div class="fj-store-item"><div class="store-img"><img :src="item.img"></div>'
 			 +'<section class="store-detail">'
 			 +'<header class="store-title"><span class="store-name">{{item.name}}</span><span>销量:{{item.sales}}</span><div class="store-range">{{item.range}}m</div></header>'
 			 +'<div class="store-mess">{{item.detail}}</div>'
-			 +'</section><span class="icon iconfont icon-more"></span></div></router-link></div></div>'
+			 +'</section><span class="icon iconfont icon-more"></span></div></router-link></div></div>',
+	computed : {
+		routeUrl : function(){  // 返回上一个路由地址
+			return this.$route.fullPath.replace("/"," ").trim();
+		}
+	}
 });
-/* 组件 : 首页*/
-var child1 = Vue.component('index-view',{
+/* 组件 : 首页内容模板*/
+var indexTpl = Vue.component('index-view',{
 	data(){
 		return {
 			imgUrl :'./img/1.jpg'
@@ -74,8 +79,8 @@ var child1 = Vue.component('index-view',{
 			 +'<section class="sroll-index cancel-scroll-bar" @touchmove.stop><swiper-view></swiper-view>'
 			 +'<list-view></list-view>'
 			 +'<div class="banner"><img :src="imgUrl" alt="图片"></div>'
-			 +'<gg-view></gg-view>'
-			 +'<fj-view :isHeader="true"></fj-view>'
+			 +'<guanggao-view></guanggao-view>'
+			 +'<fjsj-view :isHeader="true"></fjsj-view>'
 			 +'</section></div>',
 	 methods : {
 	 	selectSeat : function(){
@@ -98,9 +103,7 @@ var carTpl = Vue.component('car-view',{
 			priceCount:0,
 			price:0,
 			list :[{"name":"麦兜旗舰店","sp":[{"spName":"夏季休闲裤","price":"100","num":"1","img":"./img/sp1.jpg"},{"spName":"冬装羽绒服","price":"200","num":"2","img":"./img/sp2.jpg"}]},{"name":"嘟嘟旗舰店","sp":[{"spName":"香奈儿香水","price":"200","num":"1","img":"./img/sp3.jpg"},{"spName":"行楷字帖,大师临摹","price":"38","num":"3","img":"./img/sp2.jpg"}]}],
-			options : [{  
-            value: 'A'
-           }],
+			options : [{value: 'A'}],
            selectValue:[],
            checkName :[]
 		}
@@ -116,7 +119,7 @@ var carTpl = Vue.component('car-view',{
 			   +'<div class="sd-name"><span>全选</span>'
 			   +'<div class="count-mes"><div></div><div class="price-count">合计：<span class="priceCountNum">{{price|formatPrice}}</span></div><div class="oper-count"><mt-button type="danger"  size="small">结算({{size}})</mt-button></div></div></div></div></section></div>'
 			   +'</div>',
-    filters :{
+    filters :{  // 自定义过滤器  把金钱转换
     	formatPrice : function(val){
     		return '¥' + parseFloat(val).toFixed(2);
     	}
@@ -201,14 +204,15 @@ var carTpl = Vue.component('car-view',{
     }
 });
 /* 组件 ： 个人信息页面*/
-var child3 = Vue.component('me-view',{
+var customTpl = Vue.component('custom-view',{
 	data (){
 		return {
-			customImg:"./img/custom.jpg"
+			customImg:"./img/custom.jpg",
+			username:""
 		}
 	},
-	template : '<div class="hyzx"><mt-header fixed title="会员中心"></mt-header>'
-				+'<div class="grmes"><div class="custom-img"><img :src="customImg"></div><div class="custom-mes"><span class="custom-name">罗荣盛</span><i class="icon iconfont icon-more"></i></div></div>'
+	template : '<div class="hyzx"><mt-header fixed title="会员中心"><mt-button slot="right" @click.native="loginOut">退出登录</mt-button></mt-header>'
+				+'<div class="grmes"><div class="custom-img"><img :src="customImg"></div><div class="custom-mes"><span class="custom-name">{{username}}</span><i class="icon iconfont icon-more"></i></div></div>'
 				+'<div class="f-mes">'
 				+'<div class="f-item"><ul><li><i class="icon iconfont icon-favoritesfilling"></i></li><li>福心</li><li>2</li></ul></div>'
 				+'<div class="f-item"><ul><li><i class="icon iconfont icon-onepage48"></i></li><li>可用福分</li><li>199.99</li></ul></div>'
@@ -226,11 +230,20 @@ var child3 = Vue.component('me-view',{
 		},
 		messbox :function(){
 			this.$messagebox('提示', '操作成功');
+		},
+		loginOut : function(){
+//			sessionStorage.clear();
+			localStorage.removeItem("username");
+			this.$router.push({path:"./login",query: {redirect: this.$route.fullPath}});
 		}
+	},
+	created: function(){
+//		this.username = sessionStorage.username;
+		this.username = localStorage.username;
 	}
 });
-/* 组件 :index*/
-var temp1 ={
+/* 组件 :主页*/
+var zhuye ={
 	data(){
 		return {
 			selected:"index",
@@ -310,7 +323,7 @@ var recommendList = Vue.component('recommed-list',{
 			   +'</section>'
 })
 /* 选择城市页面 */
-var temp2 = {
+var seatTpl = {
 	data() {
 		return {
 			title:"选择城市",
@@ -329,6 +342,7 @@ var temp2 = {
 var searchTpl ={
 	template:'<div>搜索页面</div>'
 }
+/* 菜单部分路由 */
 var listTpl = {
 	data (){
 		return {
@@ -337,14 +351,11 @@ var listTpl = {
 	},
 	template :'<div class="feilei"><my-header :pageTitle="title"></my-header>'
 			  +'<mt-search></mt-search>'
-			  +'<fj-view :isHeader="false"></fj-view>'
+			  +'<fjsj-view :isHeader="false"></fjsj-view>'
 			  +'</div>'
 }
-var ggTpl = {
+var guanggaoTpl = {
 	template : '<div>广告路由</div>'
-}
-var fjTpl ={
-	template : '<div>附件商家路由</div>'
 }
 /* 轮播图路由 */
 var swiperTpl = {
@@ -368,6 +379,7 @@ var swiperTpl = {
 	},
 	template : '<div><mt-checklist title="复选框标题" v-model="value" :options="options"></mt-checklist></div>'
 }
+/* 我的推荐页面 */
 var recommendTpl = {
 	data (){
 		return{
@@ -387,6 +399,7 @@ var recommendTpl = {
 			  +'</section>'
 	
 }
+/* 登录页面 */
 var loginTpl = {
 	data (){
 		return {
@@ -394,6 +407,8 @@ var loginTpl = {
 			bannerImg:"./img/login.jpg",
 			popupVisible:false,
 			loginType:"",
+			phone:"",
+			pas:"",
 			visibleItemCount:3,
 			selectTypeValue :"",
 			slots: [{flex:1,values: ['大众会员','黄金会员', '白金会员', '钻石会员', '超级会员'],className: 'slot1',defaultIndex:0}]
@@ -403,12 +418,12 @@ var loginTpl = {
 			 +'<my-header :pageTitle="pagetitle"></my-header>'
 			 +'<div class="login-banner"><img :src="bannerImg"></div>'
 			 +'<form><div class="login-mes"><div class="login-label">登录类型</div><div class="login-input"><input type="text" v-model="loginType" placeholder="会员" @click.prevent.stop="changeType(loginType)"/></div></div>'
-			 +'<div class="login-mes"><div class="login-label">手机号码</div><div class="login-input"><input type="text"/></div></div>'
-			 +'<div class="login-mes"><div class="login-label">密码</div><div class="login-input"><input type="password"/></div></div>'
+			 +'<div class="login-mes"><div class="login-label">手机号码</div><div class="login-input"><input type="text" v-model="phone"/></div></div>'
+			 +'<div class="login-mes"><div class="login-label">密码</div><div class="login-input"><input type="password" v-model="pas "/></div></div>'
 			 +'<mt-popup v-if="popupVisible" v-model="popupVisible" position="bottom" class="mint-popup-4">'
 			 +'<div class="height40"><div class="type-oper" @click="cacelModal">取消</div><div class="center"></div><div class="type-oper success" @click="selectType">完成</div></div>'
 			 +'<mt-picker :slots="slots" @change="onValuesChange" :visible-item-count="visibleItemCount"></mt-picker></mt-popup>'
-			 +'<div class="btn"><mt-button size="small">登录</mt-button></div>'
+			 +'<div class="btn"><mt-button size="small" @click.native="redirect">登录</mt-button></div>'
 			 +'</form>'
 			 +'<div class="other-oper"><div class="other-oper-item re"><mt-button size="small">注册</mt-button></div><div class="other-oper-item"><mt-button size="small">忘记密码</mt-button></div></div>'
 			 +'</section>',
@@ -433,9 +448,15 @@ var loginTpl = {
 	 	},
 	 	cacelModal : function(){
 	 		this.popupVisible = false;
+	 	},
+	 	redirect :function(){  // 登录后重定向个人信息页面
+//	 		sessionStorage.username = this.phone;
+	 		localStorage.username = this.phone;
+	 		this.$router.push(this.$route.query.redirect);
 	 	}
 	 }
 }
+/* 商店*/
 var storeMes = {
 	data (){
 		return {
@@ -456,14 +477,18 @@ var storeMes = {
 			  +'<div class="seat-map"><i class="icon iconfont icon-map"></i></div>'
 			  +'<div class="seat-phone"><i class="icon iconfont icon-phone"></i></div></div>'
 			  +'<mt-navbar v-model="selected">'
-			  +'<mt-tab-item :id="item.id" v-for="(item,key) in sort" @click.native="swapRoute(item.label)">{{item.label}}</mt-tab-item>'
+			  +'<mt-tab-item :id="item.id" v-for="(item,key) in sort" @click.native="swapRoute(item.id)">{{item.label}}</mt-tab-item>'
 			  +'</mt-navbar>'
 			  +'<router-view></router-view>'
 			  +'</section></div>',
 	methods:{
 		swapRoute : function(val){
-			this.$router.push({name:val});
+			this.$router.push({name:val});  // 路由跳转
 		}
+	},
+	created : function(){  // 记录路由信息，好让返回
+		this.prevRouter = this.$route.query.name;
+		this.selected = this.$route.fullPath.substring(this.$route.fullPath.lastIndexOf("/")+1,this.$route.fullPath.lastIndexOf("?"));
 	}
 }
 var store = Vue.component('menu-list',{
